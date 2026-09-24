@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block main %}
+<section class="wrap section page-head">
+  <h1 class="page-title">Work</h1>
+  <p class="lead">Each project is written up as a case study: why I built it, how it works, which technologies I chose, and what I learned.</p>
+</section>
+<section class="wrap work-index">
+  {% for p in projects %}
+    {% include 'partials/work_item.html' %}
+  {% endfor %}
+</section>
+{% endblock %}

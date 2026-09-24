@@ -1,0 +1,33 @@
+# Text of the German page (/de/). Skills, experience and languages come from profile.yml.
+title: Florent Chevallier, Geomatiker & GIS-Entwickler
+description: >-
+  Portfolio von Florent Chevallier, Geomatiker und GIS-Entwickler in München:
+  Automatisierung von Geodaten, eigene Kartenwerkzeuge und interaktive Web-Karten.
+role: Geomatiker & GIS-Entwickler
+pitch: >-
+  Über fünf Jahre Erfahrung in der Verarbeitung, Analyse und Automatisierung von Geodaten,
+  zuletzt in Pipelines, die Geodaten aus über 40 Ländern für Apple Maps integrieren und aktualisieren.
+  Seit Februar 2026 vertiefe ich meine Softwareentwicklung mit eigenen Projekten in Python, QGIS und Webtechnologien.
+contact_line: Offen für neue Aufgaben in GIS und Geodaten, Raum München.
+
+nav_projects: Projekte
+nav_profile: Profil
+nav_english: English
+skip: Zum Inhalt springen
+
+projects_h: Eigene Projekte
+projects_intro: >-
+  Zwei Projekte, jeweils als Fallstudie dokumentiert: warum ich sie gebaut habe, wie sie funktionieren
+  und was ich dabei gelernt habe. Die technischen Fallstudien sind auf Englisch.
+case_link: Fallstudie lesen (Englisch)
+focus_h: Kompetenzen
+experience_h: Berufserfahrung
+education_h: Ausbildung
+languages_h: Sprachen
+beyond_h: Außerhalb der Arbeit
+contact_h: Kontakt
+ai_h: Arbeiten mit KI-Werkzeugen
+ai_text: >-
+  In meinen eigenen Projekten nutze ich KI-gestützte Entwicklungswerkzeuge, ganz offen. Meine Aufgabe sind die
+  Problemstellung, die Datenauswahl, die Designentscheidungen und das Testen mit echten Dateien und Karten;
+  die Werkzeuge beschleunigen das Schreiben des Codes.

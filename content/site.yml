@@ -1,0 +1,31 @@
+# Global settings. Edit here; every page picks them up.
+name: Florent Chevallier
+role: Geomatician & GIS developer
+location: Munich, Germany
+# Public address of the site, no trailing slash. Used for canonical links, the sitemap and social previews.
+# Change it if you rename the repository to <user>.github.io or add a custom domain.
+url: https://florentchevallier.github.io/portfolio
+
+description: >-
+  Portfolio of Florent Chevallier, geomatician and GIS developer in Munich.
+  Case studies on geodata automation, desktop and QGIS tools, and interactive web maps.
+work_description: >-
+  Case studies by Florent Chevallier: a GPX and Strava desktop app with a QGIS plugin,
+  and an interactive geography game built on real relief data.
+
+# The address is assembled in the browser so it is not sitting in the HTML for scrapers.
+email:
+  user: florent.chevallier
+  domain: gmail.com
+
+links:
+  github: https://github.com/florentchevallier
+  # linkedin: https://www.linkedin.com/in/your-profile/     <- uncomment and fill in to show it
+
+# Home page hero
+hero:
+  pitch: >-
+    More than five years of processing, analysing and automating geodata, most recently in the
+    pipelines that integrate and update map data from over 40 countries for Apple Maps.
+    Since February 2026 I have been building my own mapping tools with Python, QGIS and the web.
+  contact_line: Open to new roles in GIS and geodata, based in Munich.

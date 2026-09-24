@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% block head %}
+<script type="application/ld+json">{{ {
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "name": p.title,
+  "description": p.summary,
+  "author": {"@type": "Person", "name": site.name},
+  "url": site.url ~ "/" ~ p.url,
+  "dateCreated": p.year | string
+} | tojson }}</script>
+{% endblock %}
+{% block main %}
+<article class="project">
+  <header class="wrap project-head">
+    <p class="back"><a href="{{ root }}projects/">All work</a></p>
+    <h1>{{ p.title }}</h1>
+    <p class="lead">{{ (p.lead | default(p.summary)) | trim }}</p>
+    {% if p.links %}
+    <p class="project-actions">
+      {% for l in p.links %}
+      <a class="btn{% if l.primary %} btn-primary{% endif %}" href="{{ l.url }}">{{ l.label }}</a>
+      {% endfor %}
+    </p>
+    {% endif %}
+  </header>
+
+  <div class="wrap">
+    {% if p.embed %}
+    <figure class="embed" style="--ratio: {{ p.cover_ratio | default('16 / 9') }}; --h: {{ p.embed.height | default(680) }}px">
+      <div class="embed-stage" data-embed="{{ p.embed.url }}" data-title="{{ p.embed.title | default(p.title) }}">
+        <img src="{{ p.cover }}" alt="{{ p.cover_alt | default('') }}" decoding="async">
+        <div class="embed-cta">
+          <button type="button" class="btn btn-primary" data-play hidden>{{ p.embed.button | default('Play') }}</button>
+          <a class="btn btn-light" href="{{ p.embed.url }}">{{ p.embed.open_label | default('Open in a new tab') }}</a>
+          {% if p.embed.note %}<p class="embed-note">{{ p.embed.note }}</p>{% endif %}
+        </div>
+      </div>
+    </figure>
+    {% elif p.cover %}
+    <figure class="cover{% if p.cover_fit | default('cover') == 'contain' %} is-contain{% endif %}"
+            style="--ratio: {{ p.cover_ratio | default('16 / 9') }};{% if p.cover_bg %} --cover-bg: {{ p.cover_bg }};{% endif %}">
+      <img src="{{ p.cover }}" alt="{{ p.cover_alt | default('') }}" decoding="async">
+    </figure>
+    {% endif %}
+  </div>
+
+  <div class="wrap project-layout{% if not p.facts and not p.toc %} no-rail{% endif %}">
+    {% if p.facts or p.toc %}
+    <aside class="rail">
+      <dl class="facts">
+        {% for f in p.facts %}
+        <div><dt>{{ f.label }}</dt><dd>{{ f.value }}</dd></div>
+        {% endfor %}
+      </dl>
+      {% if p.toc %}
+      <nav class="toc" aria-label="On this page">
+        <p class="rail-h">On this page</p>
+        <ul>
+          {% for t in p.toc %}<li><a href="#{{ t.id }}">{{ t.title }}</a></li>{% endfor %}
+        </ul>
+      </nav>
+      {% endif %}
+    </aside>
+    {% endif %}
+    <div class="prose">
+      {{ p.body | safe }}
+    </div>
+  </div>
+
+  {% if next_project %}
+  <nav class="wrap next" aria-label="Next project">
+    <a href="{{ root }}{{ next_project.url }}">
+      <span class="next-label">Next project</span>
+      <span class="next-title">{{ next_project.title }}</span>
+      <span class="next-sum">{{ next_project.summary | trim }}</span>
+    </a>
+  </nav>
+  {% endif %}
+</article>
+{% endblock %}

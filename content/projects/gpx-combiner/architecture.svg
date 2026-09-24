@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 440" role="img" aria-labelledby="t d">
+<title id="t">Architecture of GPX Combiner</title>
+<desc id="d">Two products, one behaviour. The desktop app has its Tkinter interface and its GPX and Strava logic in a single file. The QGIS plugin has Qt dialogs and uses a separate core folder that is a port of the same logic. Both work with GPX files and the Strava API.</desc>
+<style>
+text{font-family:Overpass,"Segoe UI",Arial,sans-serif;fill:#14222E}
+.h{font-size:16px;font-weight:700}
+.b{font-size:17px;font-weight:800}
+.t{font-size:14px;fill:#465662}
+.box{fill:#fff;stroke:#14222E;stroke-width:2;rx:8}
+.data{fill:#fff;stroke:#14222E;stroke-width:2;rx:8}
+.arr{stroke:#14222E;stroke-width:2.2;fill:none;marker-end:url(#a)}
+.rel{stroke:#2F6DB8;stroke-width:2.2;fill:none;stroke-dasharray:6 5}
+</style>
+<defs><marker id="a" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#14222E"/></marker></defs>
+<rect width="960" height="440" rx="6" fill="#F7F9F8"/>
+
+<text class="h" x="150" y="36" text-anchor="middle">Interface</text>
+<text class="h" x="500" y="36" text-anchor="middle">Logic</text>
+<text class="h" x="830" y="36" text-anchor="middle">Data</text>
+
+<rect class="box" x="30" y="66" width="240" height="120"/>
+<text class="b" x="150" y="106" text-anchor="middle">Desktop app</text>
+<text class="t" x="150" y="130" text-anchor="middle">Tkinter interface, map preview</text>
+<text class="t" x="150" y="152" text-anchor="middle">macOS, Windows, Linux</text>
+
+<rect class="box" x="350" y="66" width="300" height="120"/>
+<text class="b" x="500" y="106" text-anchor="middle">gpx_combiner.py</text>
+<text class="t" x="500" y="130" text-anchor="middle">GPX handling and Strava client,</text>
+<text class="t" x="500" y="152" text-anchor="middle">inside the same self-contained file</text>
+
+<rect class="box" x="30" y="234" width="240" height="120"/>
+<text class="b" x="150" y="274" text-anchor="middle">QGIS plugin</text>
+<text class="t" x="150" y="298" text-anchor="middle">Qt dialogs, styled track layers</text>
+<text class="t" x="150" y="320" text-anchor="middle">beta, QGIS 3.x</text>
+
+<rect class="box" x="350" y="234" width="300" height="120"/>
+<text class="b" x="500" y="274" text-anchor="middle">core/</text>
+<text class="t" x="500" y="298" text-anchor="middle">gpx_core.py and strava_client.py,</text>
+<text class="t" x="500" y="320" text-anchor="middle">plain Python with no GUI code</text>
+
+<rect class="data" x="730" y="66" width="200" height="288"/>
+<text class="b" x="830" y="178" text-anchor="middle">GPX files</text>
+<text class="t" x="830" y="202" text-anchor="middle">from any GPS device</text>
+<text class="b" x="830" y="252" text-anchor="middle">Strava API</text>
+<text class="t" x="830" y="276" text-anchor="middle">activities, streams, upload</text>
+
+<path class="arr" d="M272 126H348"/>
+<path class="arr" d="M272 294H348"/>
+<path class="arr" d="M652 126H728"/>
+<path class="arr" d="M652 294H728"/>
+
+<path class="rel" d="M500 188V232"/>
+<text class="t" x="516" y="216">core/ is a port of the desktop logic</text>
+
+<text class="t" x="480" y="392" text-anchor="middle">Everything runs on the user's computer. Credentials are stored locally; the network calls go to Strava,</text>
+<text class="t" x="480" y="412" text-anchor="middle">OpenStreetMap tiles (map preview) and Nominatim (city names).</text>
+</svg>

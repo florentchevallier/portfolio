@@ -1,0 +1,31 @@
+{# One project on the home page or the project index. Expects `p`. #}
+{% set is_de = lang is defined and lang == 'de' %}
+{% set href = root ~ p.url %}
+<article class="work">
+  {% if p.cover %}
+  <a class="work-media{% if p.cover_fit | default('cover') == 'contain' %} is-contain{% endif %}" href="{{ href }}" tabindex="-1" aria-hidden="true"
+     style="--ratio: {{ p.cover_ratio | default('16 / 9') }};{% if p.cover_bg %} --cover-bg: {{ p.cover_bg }};{% endif %}">
+    <img src="{{ href }}{{ p.cover }}" alt="" loading="lazy" decoding="async">
+  </a>
+  {% endif %}
+  <div class="work-body">
+    <div class="work-head">
+      <h3><a href="{{ href }}">{{ p.title }}</a></h3>
+      {% set kind = (p.kind_de | default(p.kind)) if is_de else p.kind %}
+      {% set status = (p.status_de | default(p.status)) if is_de else p.status %}
+      <p class="work-kind">{{ kind }}{% if status %}<span class="work-status">{{ status }}</span>{% endif %}</p>
+    </div>
+    <div class="work-text">
+      <p class="work-summary">{{ (p.summary_de | default(p.summary)) if is_de else p.summary }}</p>
+      <ul class="tags">
+        {% for t in (p.tags | default([]))[:6] %}<li>{{ t }}</li>{% endfor %}
+      </ul>
+      <p class="work-actions">
+        <a class="btn" href="{{ href }}">{{ de.case_link if is_de else 'Read the case study' }}</a>
+        {% for l in p.links if l.card | default(false) %}
+        <a class="btn btn-quiet" href="{{ l.url }}">{{ (l.label_de | default(l.label)) if is_de else l.label }}</a>
+        {% endfor %}
+      </p>
+    </div>
+  </div>
+</article>

@@ -1,0 +1,14 @@
+<ol class="jobs">
+  {% for j in profile.experience %}
+  <li class="job">
+    <p class="job-period">{{ tr(j.period) }}</p>
+    <div class="job-main">
+      <h3>{{ tr(j.role) }}</h3>
+      <p class="job-org">{{ tr(j.org) }}</p>
+      <ul>
+        {% for pt in tr(j.points) %}<li>{{ pt }}</li>{% endfor %}
+      </ul>
+    </div>
+  </li>
+  {% endfor %}
+</ol>

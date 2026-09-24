@@ -1,0 +1,116 @@
+# Profile data shared by the About page (English) and the German page.
+# Every text field can be a plain string or {en: ..., de: ...}.
+
+focus:
+  - label: {en: GIS and geodata, de: GIS und Geodaten}
+    skills:
+      en: QGIS, ArcGIS Pro, ArcGIS Online and Portal, ArcMap, GDAL, GRASS, SAGA, OpenStreetMap
+      de: QGIS, ArcGIS Pro, ArcGIS Online und Portal, ArcMap, GDAL, GRASS, SAGA, OpenStreetMap
+  - label: {en: Programming, de: Programmierung}
+    skills:
+      en: Python, ArcPy, R, SQL, JavaScript, HTML, CSS, Git and GitHub
+      de: Python, ArcPy, R, SQL, JavaScript, HTML, CSS, Git und GitHub
+  - label: {en: Databases, de: Datenbanken}
+    skills:
+      en: PostgreSQL and PostGIS, Oracle
+      de: PostgreSQL und PostGIS, Oracle
+  - label: {en: Web mapping, de: Webkartierung}
+    skills:
+      en: MapLibre GL JS, OpenStreetMap tiles, ArcGIS Portal and Sites, GeoServer (basics)
+      de: MapLibre GL JS, OpenStreetMap-Kacheln, ArcGIS Portal und Sites, GeoServer (Grundkenntnisse)
+  - label: {en: Remote sensing, de: Fernerkundung}
+    skills:
+      en: Satellite imagery, orthophotos, photogrammetry, raster processing, supervised classification
+      de: Satellitenbilder, Orthophotos, Photogrammetrie, Rasterverarbeitung, überwachte Klassifikation
+  - label: {en: Data quality and automation, de: Datenqualität und Automatisierung}
+    skills:
+      en: QA/QC, metadata validation, automated GIS workflows, documentation and training
+      de: QA/QC, Metadatenprüfung, automatisierte GIS-Workflows, Dokumentation und Schulungen
+
+experience:
+  - period: {en: since 02/2026, de: seit 02/2026}
+    org: {en: Independent projects, de: Eigene Projekte}
+    role: {en: Software and GIS development, de: Software- und GIS-Entwicklung}
+    points:
+      en:
+        - "GPX Combiner: a cross-platform Python app and QGIS plugin, developed and documented on GitHub."
+        - "GeOlympic Games: an interactive geography game built on MapLibre and open relief data."
+      de:
+        - "GPX Combiner: plattformübergreifende Python-Anwendung und QGIS-Plugin, entwickelt und dokumentiert auf GitHub."
+        - "GeOlympic Games: interaktives Geografiespiel auf Basis von MapLibre und offenen Reliefdaten."
+  - period: 03/2023 – 02/2026
+    org: Apple / Modis
+    role: {en: Senior Geomatics Engineer, de: Senior Geomatikingenieur}
+    points:
+      en:
+        - "Built and optimised automated pipelines that integrate and update geodata from over 40 countries for Apple Maps."
+        - "Ran QA/QC, metadata checks and validation; resolved integration problems and agreed changes with data suppliers."
+      de:
+        - "Entwicklung und Optimierung automatisierter Pipelines zur Integration und Aktualisierung von Geodaten aus über 40 Ländern für Apple Maps."
+        - "QA/QC, Metadatenprüfung und Validierung; Lösung von Integrationsproblemen und Abstimmung mit Datenlieferanten."
+  - period: 09/2021 – 01/2023
+    org: {en: "Plaine Commune, France", de: "Plaine Commune, Frankreich"}
+    role: {en: Geomatician, de: Geomatiker}
+    points:
+      en:
+        - "Administered GIS servers and web-map services for a territory of about 450,000 inhabitants (ArcGIS Portal, Oracle geodatabases)."
+        - "Updated the local city map from photogrammetry and orthophotos; trained colleagues in QGIS, OpenStreetMap, ArcGIS Pro and ArcGIS Portal."
+      de:
+        - "Verwaltung von GIS-Servern und Webkartendiensten für ein Gebiet mit rund 450.000 Einwohnern (ArcGIS Portal, Oracle-Geodatenbanken)."
+        - "Aktualisierung des Stadtplans auf Grundlage von Photogrammetrie und Orthophotos; Schulungen zu QGIS, OpenStreetMap, ArcGIS Pro und ArcGIS Portal."
+  - period: 02/2020 – 05/2021
+    org: {en: "Apple Maps / RWS Moravia, Ireland", de: "Apple Maps / RWS Moravia, Irland"}
+    role: {en: GIS Data Analyst, de: GIS-Data Analyst}
+    points:
+      en:
+        - "Quality assurance and integration of POI datasets; conflation checks and reporting."
+        - "Root-cause analysis of integration and update problems, and coordination of fixes with the data teams."
+      de:
+        - "Qualitätssicherung und Integration von POI-Datensätzen; Conflation-Prüfungen und Berichte."
+        - "Ursachenanalyse bei Integrations- und Aktualisierungsproblemen und Koordination der Korrekturen mit den Datenteams."
+  - period: 02/2019 – 09/2019
+    org: {en: "ENS Lyon, France", de: "ENS Lyon, Frankreich"}
+    role: {en: Geomatics Research Engineer, de: Forschungsingenieur Geomatik}
+    points:
+      en:
+        - "Built a database of several thousand GPS tracks from cyclists, processed and analysed with PostGIS and R."
+      de:
+        - "Aufbau einer Datenbank mit mehreren tausend GPS-Tracks von Radfahrenden, Verarbeitung und Analyse mit PostGIS und R."
+  - period: 2017 – 2018
+    org: {en: Internships, de: Praktika}
+    role: {en: "Greece and France", de: "Griechenland und Frankreich"}
+    points:
+      en:
+        - "Greek forest cadastre with Omikron Environmental Consultants: GPS survey, parcel delineation from satellite and historical aerial imagery, supervised classification."
+        - "Université Lyon 2: georeferencing and digitising, land-use and land-use change maps on agriculture and tropical deforestation."
+      de:
+        - "Griechischer Waldkataster bei Omikron Environmental Consultants: GPS-Erfassung, Parzellenabgrenzung anhand von Satelliten- und historischen Luftbildern, überwachte Klassifikation."
+        - "Université Lyon 2: Georeferenzierung und Digitalisierung, Landnutzungs- und Landnutzungsänderungskarten zu Landwirtschaft und tropischer Entwaldung."
+
+education:
+  - en: "Master's in Geomatics: ENS Lyon, Université Lyon 2, Université Jean-Monnet"
+    de: "Master Geomatik: ENS Lyon, Université Lyon 2, Université Jean-Monnet"
+  - en: "Master's at Sciences Po Aix: International Political Journalism and Institutional Communication"
+    de: "Master am Institut d'études politiques (Sciences Po Aix): Internationaler Politikjournalismus und institutionelle Kommunikation"
+  - en: "Master's in China Studies"
+    de: "Master in China Studies"
+  - en: "Bachelor's in Geography and History"
+    de: "Bachelor Geographie und Geschichte"
+
+languages:
+  - {label: {en: French, de: Französisch}, level: {en: native, de: Muttersprache}}
+  - {label: {en: English, de: Englisch}, level: "C2"}
+  - {label: {en: German, de: Deutsch}, level: {en: professional proficiency, de: berufliche Kenntnisse}}
+  - {label: {en: Mandarin Chinese, de: Mandarin-Chinesisch}, level: {en: intermediate, de: Mittelstufe}}
+
+beyond:
+  en:
+    - OpenStreetMap contributor and humanitarian mapper
+    - Volunteer bicycle mechanic
+    - Photography and media support at cycle races
+    - Long-distance cycling, GPS route planning and cartography
+  de:
+    - OpenStreetMap-Contributor und Humanitarian Mapper
+    - Ehrenamtlicher Fahrradmechaniker
+    - Fotografie und Medienunterstützung bei Radrennen
+    - Langstreckenradfahren, GPS-Routenplanung und Kartografie

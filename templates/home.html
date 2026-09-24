@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block head %}
+<script type="application/ld+json">{{ {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": site.name,
+  "jobTitle": site.role,
+  "url": site.url ~ "/",
+  "sameAs": [site.links.github] + ([site.links.linkedin] if site.links.linkedin else []),
+  "address": {"@type": "PostalAddress", "addressLocality": "Munich", "addressCountry": "DE"}
+} | tojson }}</script>
+{% endblock %}
+{% block main %}
+{% include 'partials/hero.html' %}
+
+<section id="work" class="section wrap">
+  <h2>Selected work</h2>
+  {% for p in featured %}
+    {% include 'partials/work_item.html' %}
+  {% endfor %}
+  {% if projects | length > featured | length %}
+  <p><a href="{{ root }}projects/">All projects</a></p>
+  {% endif %}
+</section>
+
+<section class="section wrap focus">
+  <h2>What I work with</h2>
+  {% include 'partials/focus.html' %}
+</section>
+
+<section id="contact" class="section wrap contact">
+  <h2>Get in touch</h2>
+  <p class="contact-line">{{ site.hero.contact_line }}</p>
+  <p class="contact-links">
+    {% include 'partials/email.html' %}
+    <a href="{{ site.links.github }}" rel="me">GitHub</a>
+    {% if site.links.linkedin %}<a href="{{ site.links.linkedin }}" rel="me">LinkedIn</a>{% endif %}
+  </p>
+</section>
+{% endblock %}
