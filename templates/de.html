@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block head %}
+<script type="application/ld+json">{{ {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": site.name,
+  "jobTitle": de.role,
+  "url": site.url ~ "/de/",
+  "sameAs": [site.links.github] + ([site.links.linkedin] if site.links.linkedin else []),
+  "address": {"@type": "PostalAddress", "addressLocality": "München", "addressCountry": "DE"}
+} | tojson }}</script>
+{% endblock %}
+{% block main %}
+{% include 'partials/hero.html' %}
+
+<section id="projekte" class="section wrap">
+  <h2>{{ de.projects_h }}</h2>
+  <p class="lead lead-narrow">{{ de.projects_intro | trim }}</p>
+  {% for p in projects %}
+    {% include 'partials/work_item.html' %}
+  {% endfor %}
+</section>
+
+<section id="profil" class="section wrap focus">
+  <h2>{{ de.focus_h }}</h2>
+  {% include 'partials/focus.html' %}
+</section>
+
+<section class="section wrap">
+  <h2>{{ de.experience_h }}</h2>
+  {% include 'partials/experience.html' %}
+</section>
+
+<section class="section wrap two-col">
+  <div>
+    <h2>{{ de.education_h }}</h2>
+    <ul class="plain edu">
+      {% for e in profile.education %}<li>{{ tr(e) }}</li>{% endfor %}
+    </ul>
+  </div>
+  <div>
+    <h2>{{ de.languages_h }}</h2>
+    <ul class="plain">
+      {% for l in profile.languages %}<li><strong>{{ tr(l.label) }}</strong> {{ tr(l.level) }}</li>{% endfor %}
+    </ul>
+    <h2 class="h2-spaced">{{ de.beyond_h }}</h2>
+    <ul class="plain">
+      {% for b in profile.beyond.de %}<li>{{ b }}</li>{% endfor %}
+    </ul>
+  </div>
+</section>
+
+<section class="section wrap ai-note">
+  <h2>{{ de.ai_h }}</h2>
+  <p class="lead lead-narrow">{{ de.ai_text | trim }}</p>
+</section>
+
+<section id="contact" class="section wrap contact">
+  <h2>{{ de.contact_h }}</h2>
+  <p class="contact-line">{{ de.contact_line }}</p>
+  <p class="contact-links">
+    {% include 'partials/email.html' %}
+    <a href="{{ site.links.github }}" rel="me">GitHub</a>
+    {% if site.links.linkedin %}<a href="{{ site.links.linkedin }}" rel="me">LinkedIn</a>{% endif %}
+  </p>
+</section>
+{% endblock %}

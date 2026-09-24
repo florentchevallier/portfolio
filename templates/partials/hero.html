@@ -1,0 +1,20 @@
+{% set is_de = lang is defined and lang == 'de' %}
+<section class="hero">
+  <div class="hero-art">
+    {% include 'partials/contours.svg' %}
+  </div>
+  <div class="wrap hero-copy">
+    <h1>{{ site.name }}</h1>
+    <p class="hero-role">{{ de.role if is_de else site.role }}</p>
+    <p class="hero-pitch">{{ (de.pitch if is_de else site.hero.pitch) | trim }}</p>
+    <p class="hero-actions">
+      {% if is_de %}
+      <a class="btn btn-primary" href="#projekte">{{ de.projects_h }}</a>
+      <a class="btn" href="#profil">{{ de.nav_profile }}</a>
+      {% else %}
+      <a class="btn btn-primary" href="#work">See the work</a>
+      <a class="btn" href="{{ root }}about/">About and experience</a>
+      {% endif %}
+    </p>
+  </div>
+</section>

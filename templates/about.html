@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block main %}
+<section class="wrap section page-head">
+  <h1 class="page-title">About</h1>
+</section>
+<section class="wrap about-grid">
+  <div class="prose about-prose">{{ body | safe }}</div>
+  <aside class="about-side">
+    <h2 class="side-h">Languages</h2>
+    <ul class="plain">
+      {% for l in profile.languages %}<li><strong>{{ tr(l.label) }}</strong> {{ tr(l.level) }}</li>{% endfor %}
+    </ul>
+    <h2 class="side-h">Beyond work</h2>
+    <ul class="plain">
+      {% for b in profile.beyond.en %}<li>{{ b }}</li>{% endfor %}
+    </ul>
+  </aside>
+</section>
+<section class="wrap section">
+  <h2>Experience</h2>
+  {% include 'partials/experience.html' %}
+</section>
+<section class="wrap section">
+  <h2>Education</h2>
+  <ul class="plain edu">
+    {% for e in profile.education %}<li>{{ tr(e) }}</li>{% endfor %}
+  </ul>
+</section>
+<section class="wrap section focus">
+  <h2>What I work with</h2>
+  {% include 'partials/focus.html' %}
+</section>
+<section id="contact" class="wrap section contact">
+  <h2>Get in touch</h2>
+  <p class="contact-line">{{ site.hero.contact_line }}</p>
+  <p class="contact-links">
+    {% include 'partials/email.html' %}
+    <a href="{{ site.links.github }}" rel="me">GitHub</a>
+    {% if site.links.linkedin %}<a href="{{ site.links.linkedin }}" rel="me">LinkedIn</a>{% endif %}
+  </p>
+</section>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% set is_de = lang is defined and lang == 'de' %}
+<footer class="site-footer">
+  <div class="wrap foot">
+    <p>&copy; {{ year }} {{ site.name }}</p>
+    <p>
+      <a href="{{ site.links.github }}" rel="me">GitHub</a>
+      {% if site.links.linkedin %}<a href="{{ site.links.linkedin }}" rel="me">LinkedIn</a>{% endif %}
+      {% include 'partials/email.html' %}
+    </p>
+    <p class="foot-note">
+      {% if is_de %}
+      Ohne Cookies, Analyse- oder Tracking-Dienste. Schriften (Overpass, Vollkorn) lokal eingebunden. Gehostet auf GitHub Pages.
+      {% else %}
+      No cookies, analytics or tracking. Fonts (Overpass, Vollkorn) are self-hosted. Hosted on GitHub Pages.
+      {% endif %}
+    </p>
+  </div>
+</footer>

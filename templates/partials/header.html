@@ -1,0 +1,22 @@
+{% set is_de = lang is defined and lang == 'de' %}
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="{{ (root ~ 'de/') if is_de else (root or './') }}">
+      {% include 'partials/mark.svg' %}
+      <span>{{ site.name }}</span>
+    </a>
+    <nav class="nav" aria-label="{{ 'Hauptnavigation' if is_de else 'Main' }}">
+      <ul>
+      {% if is_de %}
+        <li><a href="#projekte">{{ de.nav_projects }}</a></li>
+        <li><a href="#profil">{{ de.nav_profile }}</a></li>
+        <li><a href="{{ root or './' }}" hreflang="en" lang="en">{{ de.nav_english }}</a></li>
+      {% else %}
+        <li><a href="{{ root }}projects/"{% if url.startswith('projects/') %} aria-current="page"{% endif %}>Work</a></li>
+        <li><a href="{{ root }}about/"{% if url == 'about/' %} aria-current="page"{% endif %}>About</a></li>
+        <li><a href="{{ root }}de/" hreflang="de" lang="de">Deutsch</a></li>
+      {% endif %}
+      </ul>
+    </nav>
+  </div>
+</header>

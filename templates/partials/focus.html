@@ -1,0 +1,8 @@
+<dl class="focus-list">
+  {% for row in profile.focus %}
+  <div class="focus-row">
+    <dt>{{ tr(row.label) }}</dt>
+    <dd>{{ tr(row.skills) }}</dd>
+  </div>
+  {% endfor %}
+</dl>
