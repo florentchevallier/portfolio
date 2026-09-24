@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GPX Combiner | Florent Chevallier</title>
+  <meta name="description" content="Merge GPX tracks, pull activities out of Strava and push the result back. A local Python app packaged for macOS and Windows, with a companion QGIS plugin.">
+  <link rel="canonical" href="https://florentchevallier.github.io/portfolio/projects/gpx-combiner/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Florent Chevallier">
+  <meta property="og:title" content="GPX Combiner | Florent Chevallier">
+  <meta property="og:description" content="Merge GPX tracks, pull activities out of Strava and push the result back. A local Python app packaged for macOS and Windows, with a companion QGIS plugin.">
+  <meta property="og:url" content="https://florentchevallier.github.io/portfolio/projects/gpx-combiner/">
+  <meta property="og:image" content="https://florentchevallier.github.io/portfolio/static/img/og.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#F2F5F4" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0E1A23" media="(prefers-color-scheme: dark)">
+  <link rel="icon" href="../../static/img/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="../../static/fonts/overpass-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../../static/fonts/vollkorn-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../../static/css/site.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "CreativeWork", "author": {"@type": "Person", "name": "Florent Chevallier"}, "dateCreated": "2026", "description": "Merge GPX tracks, pull activities out of Strava and push the result back. A local Python app packaged for macOS and Windows, with a companion QGIS plugin.", "name": "GPX Combiner", "url": "https://florentchevallier.github.io/portfolio/projects/gpx-combiner/"}</script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="../../">
+<svg class="mark" viewBox="-20 -20 40 40" aria-hidden="true" focusable="false"><circle r="17" class="mark-ring"/><path d="M0 -9.5L8.6 5.5H-8.6Z" class="mark-tri"/></svg>      <span>Florent Chevallier</span>
+    </a>
+    <nav class="nav" aria-label="Main">
+      <ul>
+        <li><a href="../../projects/" aria-current="page">Work</a></li>
+        <li><a href="../../about/">About</a></li>
+        <li><a href="../../de/" hreflang="de" lang="de">Deutsch</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>  <main id="main">
+<article class="project">
+  <header class="wrap project-head">
+    <p class="back"><a href="../../projects/">All work</a></p>
+    <h1>GPX Combiner</h1>
+    <p class="lead">Long rides often end up as several GPX files, and Strava&#39;s API offers no GPX export. GPX Combiner puts the pieces back together, gets activities out of Strava, previews them on a map and uploads the result, all on your own computer.</p>
+    <p class="project-actions">
+      <a class="btn btn-primary" href="https://github.com/florentchevallier/GPX-Combiner/releases/latest">Download the latest release</a>
+      <a class="btn" href="https://github.com/florentchevallier/GPX-Combiner">Source code</a>
+      <a class="btn" href="https://github.com/florentchevallier/GPX-Combiner/blob/main/CHANGELOG.md">Changelog</a>
+    </p>
+  </header>
+
+  <div class="wrap">
+    <figure class="cover"
+            style="--ratio: 1800 / 601;">
+      <img src="cover.jpg" alt="The GPX Combiner logo next to a map of three coloured GPX tracks forming one loop" decoding="async">
+    </figure>
+  </div>
+
+  <div class="wrap project-layout">
+    <aside class="rail">
+      <dl class="facts">
+        <div><dt>Role</dt><dd>Design, development, testing, packaging and documentation. Code written with an AI assistant.</dd></div>
+        <div><dt>Status</dt><dd>Desktop app 3.7.7 with macOS and Windows builds; QGIS plugin 0.3.10, beta</dd></div>
+        <div><dt>Since</dt><dd>February 2026</dd></div>
+        <div><dt>Built with</dt><dd>Python 3.9+, Tkinter, Strava API, OpenStreetMap, PyQGIS, py2app, PyInstaller</dd></div>
+        <div><dt>Size</dt><dd>About 4,000 lines of Python</dd></div>
+        <div><dt>License</dt><dd>GPL-3.0-or-later</dd></div>
+      </dl>
+      <nav class="toc" aria-label="On this page">
+        <p class="rail-h">On this page</p>
+        <ul>
+<li><a href="#the-problem">The problem</a></li><li><a href="#what-it-does">What it does</a></li><li><a href="#how-it-is-built">How it is built</a></li><li><a href="#decisions-worth-explaining">Decisions worth explaining</a></li><li><a href="#what-i-learned">What I learned</a></li><li><a href="#what-comes-next">What comes next</a></li>        </ul>
+      </nav>
+    </aside>
+    <div class="prose">
+      <h2 id="the-problem">The problem</h2>
+<p>A long ride is often recorded as several GPX files. Putting them back together by hand is fiddly, and Strava&rsquo;s API
+does not offer a GPX export, so getting activities out of Strava for the same job is awkward too. I wanted one small tool
+that does both, runs locally and needs no account beyond Strava&rsquo;s own.</p>
+<figure>
+  <img src="tracks.svg" alt="A loop west of Munich made of three consecutive GPX recordings drawn in green, blue and red, with the start and finish marked" loading="lazy">
+  <figcaption>Three consecutive recordings of one 39 km ride, taken from the repository's test files. The app's map preview also gives each file its own colour; this figure is rendered for this page, not captured from the app.</figcaption>
+</figure>
+
+<h2 id="what-it-does">What it does</h2>
+<ul>
+<li>Combines several GPX files into one, in chronological order.</li>
+<li>Imports activities from Strava, with paging, date filtering and each activity&rsquo;s gear, and downloads them as GPX.</li>
+<li>Uploads the combined file back to Strava and helps avoid duplicates.</li>
+<li>Previews all loaded tracks on an OpenStreetMap map, each in its own colour, with start and finish markers.</li>
+<li>Lets you keep or drop heart rate, cadence, power and temperature.</li>
+<li>Speaks French, English, Spanish and German.</li>
+</ul>
+<h2 id="how-it-is-built">How it is built</h2>
+<p>The desktop app is a single self-contained Python file of about 2,500 lines. It uses only the standard library, with
+Tkinter for the interface; <code>tkinterdnd2</code> (drag and drop) and <code>certifi</code> (certificates in packaged builds) are optional.</p>
+<p>The QGIS plugin reuses the same logic through <code>core/</code>, a host-agnostic port with no GUI code. <code>core/</code> deliberately does not
+save credentials itself: the host does, in a JSON file for the desktop app and in QGIS settings for the plugin. The
+trade-off is two copies of the same logic that have to be kept in step.</p>
+<figure>
+  <img src="architecture.svg" alt="Diagram: the desktop app and its logic in one file, the QGIS plugin using the core folder, and both working with GPX files and the Strava API" loading="lazy">
+  <figcaption>Two products, one behaviour, and where the shared logic lives.</figcaption>
+</figure>
+
+<h2 id="decisions-worth-explaining">Decisions worth explaining</h2>
+<h3 id="rebuilding-gpx-from-stravas-data-streams">Rebuilding GPX from Strava&rsquo;s data streams</h3>
+<p>Strava&rsquo;s API returns activities as streams (time, position, altitude and, when recorded, heart rate, cadence, power
+and temperature), not as files. The app requests these streams and writes a GPX from them. The extension tags follow
+the format of Strava&rsquo;s own exports, so a combined file can be uploaded back and read as if it had been recorded natively.</p>
+<h3 id="oauth-without-a-server-of-my-own">OAuth without a server of my own</h3>
+<p>Strava requires every app to be registered. Instead of shipping a shared secret, each user registers their own Strava
+application and pastes its ID and secret into the app once. The authorisation response is caught by a tiny web server that
+runs on <code>localhost</code> for the length of the login. Credentials stay on the user&rsquo;s computer and can be erased from the settings window.</p>
+<h3 id="splicing-recordings-without-misleading-data">Splicing recordings without misleading data</h3>
+<p>Files are sorted by their first timestamp before they are merged. Some devices, COROS for example, write a cumulative distance for
+each recording; once two recordings are spliced it becomes wrong, so the app always strips it, while speed and heart rate,
+which stay valid point by point, are kept.</p>
+<h3 id="not-creating-duplicates-on-strava">Not creating duplicates on Strava</h3>
+<p>When a combined file goes back to Strava, the app checks whether any source file came from an existing Strava activity and
+offers to open those activities so they can be deleted first. Strava keeps deleted activities recoverable for 30 days.</p>
+<h3 id="shipping-it-macos-and-windows-builds">Shipping it: macOS and Windows builds</h3>
+<p>The app is packaged with py2app for macOS and PyInstaller for Windows, and published as GitHub releases. Packaging is where
+hidden assumptions surfaced. A packaged app cannot reach the system certificate store, so Strava calls failed with SSL errors
+until I bundled <code>certifi</code>. The builds are unsigned, which is why the README walks through the Gatekeeper and SmartScreen prompts.</p>
+<h3 id="a-responsive-interface">A responsive interface</h3>
+<p>The activity list shows the city each ride started near. That needs reverse geocoding with OpenStreetMap&rsquo;s Nominatim service,
+limited to one request per second by its usage policy. It runs in the background and results are cached, so the table never
+freezes while it waits.</p>
+<h3 id="a-plugin-that-declines-to-install-where-it-is-untested">A plugin that declines to install where it is untested</h3>
+<p>The plugin&rsquo;s metadata caps the supported QGIS version at 3.99. QGIS 4 will not offer it until I have tested it there.</p>
+<h2 id="what-i-learned">What I learned</h2>
+<p><strong>Packaging is its own problem.</strong> Certificates in a bundled app, Tk on a Homebrew Python, an icon that only appeared on the
+Windows executable: none of it shows up when you run the script from a terminal.</p>
+<p><strong>Constraints shape the design.</strong> No GPX export meant rebuilding files from streams. Strava&rsquo;s registration rule meant a local
+callback server and per-user credentials. Working around what an API does not do took more thought than calling what it does.</p>
+<p><strong>Sharing logic between two hosts forces clear boundaries.</strong> Deciding that <code>core/</code> never touches the disk or the interface,
+and that each host owns its own persistence, is what made the plugin possible.</p>
+<p><strong>Version numbers and changelogs pay off.</strong> The version is in the window title, and the plugin shows its own version, so I can
+tell at a glance which install I am looking at.</p>
+<p><strong>How I worked.</strong> I built this with an AI coding assistant. I defined the behaviour, tested every build against real
+files and real Strava data, chose the packaging and the architecture, and decided what shipped. The assistant did most of the typing.</p>
+<h2 id="what-comes-next">What comes next</h2>
+<ul>
+<li>QGIS 4 support, once the plugin is out of beta and better tested on QGIS 3.</li>
+<li>Full paging and date filtering in the plugin&rsquo;s Strava import, matching the desktop app.</li>
+<li>Publication in the official QGIS Plugin Repository.</li>
+<li>Checking the plugin on Windows and Linux.</li>
+</ul>
+    </div>
+  </div>
+
+  <nav class="wrap next" aria-label="Next project">
+    <a href="../../projects/geolympic-games/">
+      <span class="next-label">Next project</span>
+      <span class="next-title">GeOlympic Games</span>
+      <span class="next-sum">Guess a city, an island or a sea from nothing but its real terrain. No labels, no names, just relief: a browser game that turns a topographic map into a recognition puzzle.</span>
+    </a>
+  </nav>
+</article>
+  </main>
+<footer class="site-footer">
+  <div class="wrap foot">
+    <p>&copy; 2026 Florent Chevallier</p>
+    <p>
+      <a href="https://github.com/florentchevallier" rel="me">GitHub</a>
+<a class="mail" href="#contact" data-u="florent.chevallier" data-d="gmail.com">florent.chevallier [at] gmail.com</a>    </p>
+    <p class="foot-note">
+      No cookies, analytics or tracking. Fonts (Overpass, Vollkorn) are self-hosted. Hosted on GitHub Pages.
+    </p>
+  </div>
+</footer>  <script src="../../static/js/site.js" defer></script>
+</body>
+</html>

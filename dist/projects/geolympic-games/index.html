@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GeOlympic Games | Florent Chevallier</title>
+  <meta name="description" content="Guess a city, an island or a sea from nothing but its real terrain. No labels, no names, just relief: a browser game that turns a topographic map into a recognition puzzle.">
+  <link rel="canonical" href="https://florentchevallier.github.io/portfolio/projects/geolympic-games/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Florent Chevallier">
+  <meta property="og:title" content="GeOlympic Games | Florent Chevallier">
+  <meta property="og:description" content="Guess a city, an island or a sea from nothing but its real terrain. No labels, no names, just relief: a browser game that turns a topographic map into a recognition puzzle.">
+  <meta property="og:url" content="https://florentchevallier.github.io/portfolio/projects/geolympic-games/">
+  <meta property="og:image" content="https://florentchevallier.github.io/portfolio/projects/geolympic-games/cover.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#F2F5F4" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0E1A23" media="(prefers-color-scheme: dark)">
+  <link rel="icon" href="../../static/img/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="../../static/fonts/overpass-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../../static/fonts/vollkorn-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../../static/css/site.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "CreativeWork", "author": {"@type": "Person", "name": "Florent Chevallier"}, "dateCreated": "2026", "description": "Guess a city, an island or a sea from nothing but its real terrain. No labels, no names, just relief: a browser game that turns a topographic map into a recognition puzzle.", "name": "GeOlympic Games", "url": "https://florentchevallier.github.io/portfolio/projects/geolympic-games/"}</script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="../../">
+<svg class="mark" viewBox="-20 -20 40 40" aria-hidden="true" focusable="false"><circle r="17" class="mark-ring"/><path d="M0 -9.5L8.6 5.5H-8.6Z" class="mark-tri"/></svg>      <span>Florent Chevallier</span>
+    </a>
+    <nav class="nav" aria-label="Main">
+      <ul>
+        <li><a href="../../projects/" aria-current="page">Work</a></li>
+        <li><a href="../../about/">About</a></li>
+        <li><a href="../../de/" hreflang="de" lang="de">Deutsch</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>  <main id="main">
+<article class="project">
+  <header class="wrap project-head">
+    <p class="back"><a href="../../projects/">All work</a></p>
+    <h1>GeOlympic Games</h1>
+    <p class="lead">Every round shows a circular window onto real, unlabelled relief and asks one question: where is this? The project began as a test of whether topography alone can carry a recognition game, the way a flag or a street photo does.</p>
+    <p class="project-actions">
+      <a class="btn btn-primary" href="https://florentchevallier.github.io/GeOlympic-Games/">Play the game</a>
+      <a class="btn" href="https://github.com/florentchevallier/GeOlympic-Games">Source code</a>
+    </p>
+  </header>
+
+  <div class="wrap">
+    <figure class="embed" style="--ratio: 1800 / 601; --h: 700px">
+      <div class="embed-stage" data-embed="https://florentchevallier.github.io/GeOlympic-Games/" data-title="GeOlympic Games, live prototype">
+        <img src="cover.jpg" alt="GeOlympic Games banner: the game&#39;s title carved in relief on a green topographic map" decoding="async">
+        <div class="embed-cta">
+          <button type="button" class="btn btn-primary" data-play hidden>Play here</button>
+          <a class="btn btn-light" href="https://florentchevallier.github.io/GeOlympic-Games/">Open full screen</a>
+<p class="embed-note">The map tiles come from OpenTopoMap and MapTiler and are only requested once you press play.</p>        </div>
+      </div>
+    </figure>
+  </div>
+
+  <div class="wrap project-layout">
+    <aside class="rail">
+      <dl class="facts">
+        <div><dt>Role</dt><dd>Concept, game design, data selection and testing. Code written with an AI assistant.</dd></div>
+        <div><dt>Status</dt><dd>Prototype v0.5.6, hosted on GitHub Pages</dd></div>
+        <div><dt>Content</dt><dd>60 cities, islands and seas in six series</dd></div>
+        <div><dt>Built with</dt><dd>MapLibre GL JS, OpenTopoMap relief tiles, MapTiler, Natural Earth, QGIS</dd></div>
+        <div><dt>Format</dt><dd>One HTML file, no build step, no backend</dd></div>
+      </dl>
+      <nav class="toc" aria-label="On this page">
+        <p class="rail-h">On this page</p>
+        <ul>
+<li><a href="#the-idea">The idea</a></li><li><a href="#how-a-round-works">How a round works</a></li><li><a href="#how-it-is-built">How it is built</a></li><li><a href="#decisions-worth-explaining">Decisions worth explaining</a></li><li><a href="#what-i-learned">What I learned</a></li><li><a href="#what-comes-next">What comes next</a></li><li><a href="#data-and-credits">Data and credits</a></li>        </ul>
+      </nav>
+    </aside>
+    <div class="prose">
+      <h2 id="the-idea">The idea</h2>
+<p>Most geography games lean on a crutch: a labelled map, a flag, a street photo. I wanted to know whether the shape of
+the land alone is enough. Can you recognise a city from the relief around it, the way you would recognise a face?</p>
+<p>I looked at a few concepts before choosing one to prototype: rotating 3D country outlines, dragging a flag onto a map,
+and a plain topographic map with every label removed. The flag game already exists elsewhere, so I dropped it, and
+I built the unlabelled map first. A few iterations in, it worked. Mountain-locked cities, coastal cities, islands and
+open seas each turned out to need their own mechanics, so the game is split into separate series with their own rules.</p>
+<h2 id="how-a-round-works">How a round works</h2>
+<p>A session is eight rounds worth 1,000 points. Each round is 100 base points plus 25 for answering within five seconds
+(three in the hard-timer mode). A wrong guess does not end the round: the circle zooms out one level and the base score
+drops. You answer by multiple choice or by typing the name.</p>
+<table>
+<thead>
+<tr>
+<th>Series</th>
+<th>Places</th>
+<th>What you see</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mountain cities</td>
+<td>13</td>
+<td>Real relief in a circle, with no coastline to lean on</td>
+</tr>
+<tr>
+<td>Coastal cities</td>
+<td>14</td>
+<td>Relief with shoreline, bays and deltas</td>
+</tr>
+<tr>
+<td>Islands, whole view</td>
+<td>21</td>
+<td>The island fitted to its outline and rotated at a random angle, one guess</td>
+</tr>
+<tr>
+<td>Islands, relief</td>
+<td>21</td>
+<td>The zoomed circle applied to islands</td>
+</tr>
+<tr>
+<td>Seas</td>
+<td>12</td>
+<td>A pannable patch of land relief around the sea, unlimited guesses</td>
+</tr>
+<tr>
+<td>Seas, hard</td>
+<td>12</td>
+<td>Underwater topography only, with no visible coastline</td>
+</tr>
+</tbody>
+</table>
+<p>Places are chosen for how well their terrain reads, from well-known cases like Hong Kong and Cuba to more
+distinctive ones like Sarajevo, Bogotá or Sulawesi. Islands whose shape gives the answer away, such as Australia
+or Greenland, are left out on purpose.</p>
+<h2 id="how-it-is-built">How it is built</h2>
+<p>The whole game is a single HTML file: no build step, no backend, no framework. It is hosted on GitHub Pages.</p>
+<ul>
+<li><strong>MapLibre GL JS</strong> draws the map. It switches between two styles depending on the mode: an OpenTopoMap relief raster,
+  which is genuinely free of place names, and a custom MapTiler bathymetric style for the hard sea mode.</li>
+<li><strong>Island outlines</strong> come from Natural Earth (50 m) through <code>world-atlas</code> and <code>topojson-client</code>. Borneo and New Guinea
+  are cut from the physical landmass rather than from a single country&rsquo;s polygon, so the shape is not truncated at a border.</li>
+<li><strong>Sea boundaries</strong> are twelve polygons I drew by hand in QGIS, five to sixteen vertices each.</li>
+</ul>
+<figure>
+  <img src="seas.svg" alt="Twelve hand-drawn sea polygons: Molucca, Adriatic, Tyrrhenian, Ligurian, Ionian, Aegean, Banda, Sulu, Celebes, Okhotsk, Baltic and Caribbean" loading="lazy">
+  <figcaption>The twelve sea boundaries as drawn in QGIS, each scaled to its own cell.</figcaption>
+</figure>
+
+<h2 id="decisions-worth-explaining">Decisions worth explaining</h2>
+<h3 id="sharper-tiles-by-rendering-twice-as-large">Sharper tiles by rendering twice as large</h3>
+<p>The map is drawn at twice its visible size and scaled back down with CSS. MapLibre therefore requests tiles one zoom
+level finer, and a clean downsample looks sharp where an upscaled tile looks blurry. The extra level is capped at each
+source&rsquo;s real maximum so the game never asks for tiles that do not exist. Padding values in the code have to be doubled
+as well, because they are measured in that larger pixel space.</p>
+<h3 id="no-waiting-between-rounds">No waiting between rounds</h3>
+<p>Waiting for tiles would eat into a fast player&rsquo;s speed bonus. While a round is played, the game drives a second,
+invisible map to the next location, so the browser cache is already warm when the next round starts.</p>
+<h3 id="a-boundary-that-matches-the-sea">A boundary that matches the sea</h3>
+<p>A map library limits panning to a rectangle, and a sea is not a rectangle. The bounding box of the Adriatic is mostly Italy
+and the Balkans. The game therefore checks the player&rsquo;s view against the hand-drawn polygon in real time, and a red
+vignette warns for as long as the view sits at or past the edge.</p>
+<figure>
+  <img src="sea-limits.svg" alt="The Adriatic Sea inside its bounding rectangle, with the land inside the rectangle hatched, next to the nine-vertex polygon drawn by hand" loading="lazy">
+  <figcaption>The Adriatic Sea: what a rectangular limit allows, and the polygon the game enforces instead.</figcaption>
+</figure>
+
+<h3 id="one-projection-per-kind-of-round">One projection per kind of round</h3>
+<p>Terrain rounds use MapLibre&rsquo;s globe projection, which avoids Mercator&rsquo;s distortion near the poles and matters for Antarctica.
+Seas and whole-island rounds use plain Mercator, because the globe&rsquo;s pan-boundary and rotated-fit maths were unreliable.
+The code tracks the active projection and only switches when it really changes: switching in the middle of a camera move
+produced a broken frame.</p>
+<h3 id="a-debug-mode-for-the-content">A debug mode for the content</h3>
+<p>Adding <code>?debug</code> to the address steps through every place in every series, with direct access to each zoom level and each
+viewpoint. It exists to catch bad viewpoints and badly drawn sea limits without playing full sessions.</p>
+<h2 id="what-i-learned">What I learned</h2>
+<p><strong>A place has to earn its spot.</strong> Flat, dry cities such as Phoenix show almost nothing on a relief map, so Phoenix
+was replaced by Athens. I now choose places for how well their terrain reads, not for how famous they are.</p>
+<p><strong>The data source decides the game.</strong> My first version used a custom MapTiler style, and the look was not what I had in mind.
+While testing sources in QGIS I found a relief-only OpenTopoMap tile endpoint with no place names, which was exactly the
+look I had in mind.</p>
+<p><strong>Know where your data stops.</strong> SRTM, the elevation model behind most relief tiles, does not cover polar latitudes, so
+Antarctica mostly shows ice. The game therefore uses a few hand-picked coastal viewpoints there and never shows the whole continent.</p>
+<p><strong>Playtesting drives the engineering.</strong> The prefetching and the continuous warning at a sea&rsquo;s edge both exist because
+playing the game showed what was wrong.</p>
+<p><strong>How I worked.</strong> I built this with an AI coding assistant. I wrote the brief for each iteration, chose the concept, the places
+and the data, drew the sea boundaries, tested every build on real maps and decided what stayed. The assistant did most of the typing.</p>
+<h2 id="what-comes-next">What comes next</h2>
+<ul>
+<li>Load the place data from GeoJSON files instead of keeping it in the HTML, so the list can grow.</li>
+<li>More series, rivers among them.</li>
+<li>Address the known limits: a simplified flag hint for multi-country islands, and no polar relief data for Antarctica.</li>
+</ul>
+<h2 id="data-and-credits">Data and credits</h2>
+<p>Relief tiles by <a href="https://opentopomap.org/">OpenTopoMap</a> (CC-BY-SA), built on OpenStreetMap and SRTM data. Bathymetric style by
+<a href="https://www.maptiler.com/">MapTiler</a>, built on OpenStreetMap data. Island geometry from
+<a href="https://www.naturalearthdata.com/">Natural Earth</a>. Mapping library: <a href="https://maplibre.org/">MapLibre GL JS</a>.</p>
+    </div>
+  </div>
+
+  <nav class="wrap next" aria-label="Next project">
+    <a href="../../projects/gpx-combiner/">
+      <span class="next-label">Next project</span>
+      <span class="next-title">GPX Combiner</span>
+      <span class="next-sum">Merge GPX tracks, pull activities out of Strava and push the result back. A local Python app packaged for macOS and Windows, with a companion QGIS plugin.</span>
+    </a>
+  </nav>
+</article>
+  </main>
+<footer class="site-footer">
+  <div class="wrap foot">
+    <p>&copy; 2026 Florent Chevallier</p>
+    <p>
+      <a href="https://github.com/florentchevallier" rel="me">GitHub</a>
+<a class="mail" href="#contact" data-u="florent.chevallier" data-d="gmail.com">florent.chevallier [at] gmail.com</a>    </p>
+    <p class="foot-note">
+      No cookies, analytics or tracking. Fonts (Overpass, Vollkorn) are self-hosted. Hosted on GitHub Pages.
+    </p>
+  </div>
+</footer>  <script src="../../static/js/site.js" defer></script>
+</body>
+</html>
