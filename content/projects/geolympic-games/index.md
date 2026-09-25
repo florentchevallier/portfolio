@@ -70,9 +70,19 @@ I recognise a city from its valley and the ranges around it? The second game sho
 relief of a place and asks for the city; each wrong guess zooms out a little. Mountain cities
 and coastal cities turned out to be two different puzzles.
 
+<figure>
+  <img src="cities.png" alt="Innsbruck and Venice, at two different zoom levels" loading="lazy">
+  <figcaption><details><summary>Innsbruck and Venice, two cities with opposite topography</figcaption>
+</figure>
+
 ### Lose yourself at sea
 
 Seas can be huge and, apart from the famous ones, little known. Given only a small patch of one, whether through the relief of its coasts and islands or through bathymetry alone, and free to drag the map around, how long does it take to name it? I drew each sea's boundary by hand in QGIS, and the hard variant uses bathymetric tiles.
+
+<figure>
+  <img src="seas.png" alt="The Greek islands and the Ligurian Golf, an unusual view" loading="lazy">
+  <figcaption><details><summary>When not given enough land to recognise, familiar seas become harder to identify</figcaption>
+</figure>
 
 ## How a round works
 
