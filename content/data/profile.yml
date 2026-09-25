@@ -39,7 +39,7 @@ experience:
         - "GPX Combiner: plattformübergreifende Python-Anwendung und QGIS-Plugin, entwickelt und dokumentiert auf GitHub."
         - "GeOlympic Games: interaktives Geografiespiel auf Basis von MapLibre und offenen Reliefdaten."
   - period: 03/2023 – 02/2026
-    org: Apple / Modis
+    org: Apple Maps / Akkodis
     role: {en: Senior Geomatics Engineer, de: Senior Geomatikingenieur}
     points:
       en:
@@ -102,6 +102,7 @@ languages:
   - {label: {en: English, de: Englisch}, level: "C2"}
   - {label: {en: German, de: Deutsch}, level: {en: professional proficiency, de: berufliche Kenntnisse}}
   - {label: {en: Mandarin Chinese, de: Mandarin-Chinesisch}, level: {en: intermediate, de: Mittelstufe}}
+#  - {label: {en: Spanish, de: Spanisch}, level: {en: beginner, de: Anfanger}}
 
 beyond:
   en:
