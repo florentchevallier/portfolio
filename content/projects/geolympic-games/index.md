@@ -1,9 +1,9 @@
 ---
 title: GeOlympic Games
 kind: Interactive web game
-status: Prototype v0.5.6, playable online
+status: Prototype v0.6, playable online
 kind_de: Interaktives Browserspiel
-status_de: Prototyp v0.5.6, online spielbar
+status_de: Prototyp v0.6, online spielbar
 year: 2026
 order: 1
 featured: true
@@ -90,8 +90,8 @@ shared by several countries, the flag is one of them.
 |---|---|---|
 | Mountain cities | 13 | Real relief in a circle, with no coastline to lean on |
 | Coastal cities | 14 | Relief with shoreline, bays and deltas |
-| Islands, whole view | 21 | The island fitted to its outline and rotated at a random angle; one guess, no timer |
-| Islands, relief | 21 | The zoomed circle applied to islands |
+| Islands, whole view | 27 | The island fitted to its outline and rotated at a random angle; one guess, no timer |
+| Islands, relief | 27 | The zoomed circle applied to islands |
 | Seas | 12 | A pannable patch of land relief around the sea; unlimited guesses, no timer, each wrong guess costs 20 points |
 | Seas, hard | 12 | Underwater topography only; land is left blank, so only the bare outline of the coast shows |
 
@@ -105,7 +105,7 @@ The whole game is a single HTML file: no build step, no backend, no framework. I
   which is genuinely free of place names, and a custom MapTiler bathymetric style for the hard sea mode.
 - **Island outlines** come from Natural Earth (50 m) through `world-atlas` and `topojson-client`. Borneo and New Guinea
   are cut from the physical landmass rather than from a single country's polygon, so the shape is not truncated at a border.
-- **Sea boundaries** are twelve polygons I drew by hand in QGIS, five to sixteen vertices each, to keep the player from drifting too far away.
+- **Sea boundaries** are polygons I drew by hand in QGIS, five to sixteen vertices each, to keep the player from drifting too far away.
 
 <figure>
   <img src="seas.svg" alt="Twelve hand-drawn sea polygons: Molucca, Adriatic, Tyrrhenian, Ligurian, Ionian, Aegean, Banda, Sulu, Celebes, Okhotsk, Baltic and Caribbean" loading="lazy">
