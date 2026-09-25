@@ -294,9 +294,16 @@ p { margin: 0 0 1em; }
 .btn-light { border-color: rgba(255, 255, 255, .7); color: #fff; }
 .btn-light:hover { background: #fff; border-color: #fff; color: #14222E; }
 .embed-stage.is-live { aspect-ratio: auto; height: var(--h, 680px); background: #000; }
+/* While playing: hide the site header and let the game use most of the viewport height. */
+html.is-playing .site-header { display: none; }
+html.is-playing .embed-stage.is-live {
+  height: calc(100vh - 3rem);
+  height: calc(100svh - 3rem);
+}
 .embed-stage iframe { display: block; width: 100%; height: 100%; border: 0; }
 @media (max-width: 40rem) {
   .embed-stage.is-live { height: min(var(--h, 680px), 82svh); }
+  html.is-playing .embed-stage.is-live { height: calc(100svh - 1rem); }
   /* on a narrow screen the controls sit under the poster instead of on top of it */
   .embed-stage:not(.is-live) { aspect-ratio: auto; background: #0E1A23; }
   .embed-stage:not(.is-live) img { height: auto; aspect-ratio: var(--ratio); }

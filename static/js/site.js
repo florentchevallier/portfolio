@@ -20,9 +20,11 @@
       frame.src = stage.dataset.embed;
       frame.title = stage.dataset.title || 'Interactive embed';
       frame.allow = 'fullscreen';
-      stage.replaceChildren(frame);
+            stage.replaceChildren(frame);
       stage.classList.add('is-live');
+      document.documentElement.classList.add('is-playing'); // hides the header, gives the game more room
       frame.focus();
+      stage.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
   });
 })();
