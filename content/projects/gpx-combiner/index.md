@@ -35,23 +35,51 @@ facts:
 
 ## The problem
 
-A long ride is often recorded as several GPX files. Putting them back together by hand is fiddly, and Strava's API
-does not offer a GPX export, so getting activities out of Strava for the same job is awkward too. I wanted one small tool
-that does both, runs locally and needs no account beyond Strava's own.
+A long ride often ends up as several GPX files: you stop the recording is stopped by mistake thinking you are done, the GPX computer gets
+restarted or reaches its limits, or you just pressed on the stop button by mistake. The same problem shows up the other way round: cycle to a
+park, go for a run, cycle back home, and a smartwatch logs three activities where you really want two, one
+per kind of effort. Strava makes this worse rather than better. Its website can export one activity as GPX at a time and only on the desktop version of the website, but the API has no export endpoint for activities at all, only for planned routes, and Strava
+offers no way to combine files in the first place.
+
+Before writing this app, I patched files together with online tools like GoToes, or, most often, did it offline by opening two files in a text editor and pasting the GPOS positions of one before or after another by hand.
 
 <figure>
   <img src="tracks.svg" alt="A loop west of Munich made of three consecutive GPX recordings drawn in green, blue and red, with the start and finish marked" loading="lazy">
   <figcaption>Three consecutive recordings of one 39 km ride, taken from the repository's test files. The app's map preview also gives each file its own colour; this figure is rendered for this page, not captured from the app.</figcaption>
 </figure>
 
+## From a copy-paste trick to an app
+
+Friends who ride with me often ask for help combining their files, and most of them have no reason to know
+that a GPX file is just XML. My first idea was simply to automate the copy-paste I was already doing by
+hand for them: read the `<track>` tags out of one file and splice them into another, without asking anyone
+to open a text editor.
+
+Once I saw how little effort Tkinter needed to turn that into a real window, I kept adding to it: a map
+preview, so you can check you picked the right files before combining them; a plain summary of what each
+file actually contains; and, since I was already fetching my own rides from Strava by hand, automatic import
+through its API. The technologies involved were also a personal challenge, and a chance to learn things I
+had not used before.
+
+<figure>
+  <img src="screenshot-main-window.png" alt="The GPX Combiner main window, with several GPX files loaded, their sensor badges, and the combine button" loading="lazy">
+  <figcaption>The main window: files loaded, sorted chronologically, each showing which sensor data it contains.</figcaption>
+</figure>
+
 ## What it does
 
-- Combines several GPX files into one, in chronological order.
+- Combines several GPX files into one, in chronological order. You choose which files belong together; the
+  app does not try to guess which activities go with which.
 - Imports activities from Strava, with paging, date filtering and each activity's gear, and downloads them as GPX.
 - Uploads the combined file back to Strava and helps avoid duplicates.
 - Previews all loaded tracks on an OpenStreetMap map, each in its own colour, with start and finish markers.
 - Lets you keep or drop heart rate, cadence, power and temperature.
 - Speaks French, English, Spanish and German.
+
+<figure>
+  <img src="screenshot-strava-import.png" alt="The Strava import window, showing a paginated list of recent activities with their type, date, gear and a selection checkbox" loading="lazy">
+  <figcaption>Importing from Strava: recent activities with gear and date filtering, before download as GPX.</figcaption>
+</figure>
 
 ## How it is built
 
@@ -97,6 +125,12 @@ offers to open those activities so they can be deleted first. Strava keeps delet
 The app is packaged with py2app for macOS and PyInstaller for Windows, and published as GitHub releases. Packaging is where
 hidden assumptions surfaced. A packaged app cannot reach the system certificate store, so Strava calls failed with SSL errors
 until I bundled `certifi`. The builds are unsigned, which is why the README walks through the Gatekeeper and SmartScreen prompts.
+I have run the compiled Windows build and the plain Python script on Ubuntu myself; there is no packaged Linux build yet.
+
+<figure>
+  <img src="screenshot-windows.png" alt="The GPX Combiner window running on Windows 11, with the desktop taskbar visible" loading="lazy">
+  <figcaption>The Windows build, compiled with PyInstaller and run on Windows 11.</figcaption>
+</figure>
 
 ### A responsive interface
 
@@ -104,9 +138,23 @@ The activity list shows the city each ride started near. That needs reverse geoc
 limited to one request per second by its usage policy. It runs in the background and results are cached, so the table never
 freezes while it waits.
 
+### Publishing under someone else's licence
+
+Getting the plugin into the official QGIS Plugin Repository comes with a condition I did not know beforehand: anything
+distributed there has to be compatible with GPL-2.0-or-later, because a QGIS plugin links against QGIS's own GPL-licensed
+libraries. The whole repository, desktop app included, is published under GPL-3.0-or-later so both stay under one licence.
+Reading what a licence actually obliges you to do, rather than picking one from a list, was a new step for me.
+
 ### A plugin that declines to install where it is untested
 
-The plugin's metadata caps the supported QGIS version at 3.99. QGIS 4 will not offer it until I have tested it there.
+The plugin's metadata caps the supported QGIS version at 3.99. QGIS 4 will not offer it until I have tested it there. The
+plugin itself has only been tested on macOS so far, which is why Windows and Linux support is still on the roadmap below,
+separately from the desktop app.
+
+<figure>
+  <img src="screenshot-qgis-plugin.png" alt="The GPX Combiner QGIS plugin panel, docked in QGIS, with GPX tracks loaded as coloured, styled layers on an OpenStreetMap basemap" loading="lazy">
+  <figcaption>The QGIS plugin: tracks loaded as styled layers, grouped and ready to combine, tested on macOS.</figcaption>
+</figure>
 
 ## What I learned
 
@@ -115,6 +163,9 @@ Windows executable: none of it shows up when you run the script from a terminal.
 
 **Constraints shape the design.** No GPX export meant rebuilding files from streams. Strava's registration rule meant a local
 callback server and per-user credentials. Working around what an API does not do took more thought than calling what it does.
+
+**A licence is a real constraint, not a checkbox.** Publishing the plugin meant learning that QGIS requires
+GPL-2.0-or-later compatibility for anything in its official repository, not just picking a licence I liked.
 
 **Sharing logic between two hosts forces clear boundaries.** Deciding that `core/` never touches the disk or the interface,
 and that each host owns its own persistence, is what made the plugin possible.
@@ -130,4 +181,8 @@ files and real Strava data, chose the packaging and the architecture, and decide
 - QGIS 4 support, once the plugin is out of beta and better tested on QGIS 3.
 - Full paging and date filtering in the plugin's Strava import, matching the desktop app.
 - Publication in the official QGIS Plugin Repository.
-- Checking the plugin on Windows and Linux.
+- Testing the plugin on Windows and Linux, and a packaged Linux build of the desktop app.
+- A mobile way to do the same thing. Several friends ask me to combine and upload their files while they are
+  still travelling home after a ride, when the desktop app is not an option. Tkinter does not run on a phone,
+  so this would mean a different interface built around the same core: browsing Strava activities, opening
+  and closing them one at a time or side by side, and sending the result back.
