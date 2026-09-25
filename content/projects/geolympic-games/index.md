@@ -59,8 +59,8 @@ usual Mercator projection, but at a random angle. The tests were real brain gymn
 exactly what I wanted.
 
 <figure>
-  <img src="Corsica.png" alt="Corsica, tilted" loading="lazy" style="width: 60%;">
-  <figcaption>How long did you need to recognise Corsica?</figcaption>
+  <img src="islands-easy.png" alt="Corsica and Madagascar, tilted at an unusual angle" loading="lazy">
+  <figcaption><details><summary>How long did it take you to recognise these 2 islands?</summary>Yes! It's Corsica and Madagascar!</details></figcaption>
 </figure>
 
 ### Read the land, not the outline
