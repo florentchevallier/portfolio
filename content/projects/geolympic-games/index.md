@@ -72,7 +72,7 @@ and coastal cities turned out to be two different puzzles.
 
 <figure>
   <img src="cities.png" alt="Innsbruck and Venice, at two different zoom levels" loading="lazy">
-  <figcaption><details><summary>Innsbruck and Venice, two cities with opposite topography</figcaption>
+  <figcaption><details><summary>Innsbruck and Venice, two cities with opposite topography</summary>Using the same OpenTopoMap basemap, both screenshots come from the Mountain cities and Coastal cities mini-games, respectively.</details></figcaption>
 </figure>
 
 ### Lose yourself at sea
@@ -81,7 +81,7 @@ Seas can be huge and, apart from the famous ones, little known. Given only a sma
 
 <figure>
   <img src="seas.png" alt="The Greek islands and the Ligurian Golf, an unusual view" loading="lazy">
-  <figcaption><details><summary>When not given enough land to recognise, familiar seas become harder to identify</figcaption>
+  <figcaption><details><summary>When not given enough land to recognise, familiar seas become harder to identify</summary>Yes, you're looking at the Greek islands (left) and the Ligurian Golf (right)</details></figcaption>
 </figure>
 
 ## How a round works
