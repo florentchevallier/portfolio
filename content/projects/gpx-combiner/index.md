@@ -35,13 +35,13 @@ facts:
 
 ## The problem
 
-A long ride often ends up as several GPX files: you stop the recording is stopped by mistake thinking you are done, the GPX computer gets
-restarted or reaches its limits, or you just pressed on the stop button by mistake. The same problem shows up the other way round: cycle to a
+A long ride often ends up as several GPX files: you stop the recording thinking you are done and then ride on, the GPS computer freezes,
+restarted or simply reaches its file-size limit, or you just inadvertently pressed on the stop button. The same problem shows up the other way round: cycle to a
 park, go for a run, cycle back home, and a smartwatch logs three activities where you really want two, one
-per kind of effort. Strava makes this worse rather than better. Its website can export one activity as GPX at a time and only on the desktop version of the website, but the API has no export endpoint for activities at all, only for planned routes, and Strava
+per kind of effort. Strava makes this worse rather than better. Its website can export one activity as GPX at a time and only on the desktop version of the website — not from the mobile app, but the API has no export endpoint for activities at all, only for planned routes, and Strava
 offers no way to combine files in the first place.
 
-Before writing this app, I patched files together with online tools like GoToes, or, most often, did it offline by opening two files in a text editor and pasting the GPOS positions of one before or after another by hand.
+Before writing this app, I patched files together with online tools like GoToes, or, most often, did it offline by opening two files in a text editor and pasting the `<track>` tag containing GPS positions of one before or after another by hand.
 
 <figure>
   <img src="tracks.svg" alt="A loop west of Munich made of three consecutive GPX recordings drawn in green, blue and red, with the start and finish marked" loading="lazy">
@@ -50,12 +50,12 @@ Before writing this app, I patched files together with online tools like GoToes,
 
 ## From a copy-paste trick to an app
 
-Friends who ride with me often ask for help combining their files, and most of them have no reason to know
-that a GPX file is just XML. My first idea was simply to automate the copy-paste I was already doing by
+Friends who ride with (or without) me often ask for help combining their files, and most of them have no reason to know
+that a GPX file is just XML and how it works. My first idea was simply to automate the copy-paste I was already doing by
 hand for them: read the `<track>` tags out of one file and splice them into another, without asking anyone
 to open a text editor.
 
-Once I saw how little effort Tkinter needed to turn that into a real window, I kept adding to it: a map
+Once I saw how little effort Tkinter needed to turn that into a user-friendly GUI, I kept adding to it: a map
 preview, so you can check you picked the right files before combining them; a plain summary of what each
 file actually contains; and, since I was already fetching my own rides from Strava by hand, automatic import
 through its API. The technologies involved were also a personal challenge, and a chance to learn things I
@@ -63,7 +63,7 @@ had not used before.
 
 <figure>
   <img src="screenshot-main-window.png" alt="The GPX Combiner main window, with several GPX files loaded, their sensor badges, and the combine button" loading="lazy">
-  <figcaption>The main window: files loaded, sorted chronologically, each showing which sensor data it contains.</figcaption>
+  <figcaption>The main window: files loaded, sorted chronologically, each showing which sensor data it contains. Note that the middle one misses Cadence.</figcaption>
 </figure>
 
 ## What it does
@@ -128,8 +128,8 @@ until I bundled `certifi`. The builds are unsigned, which is why the README walk
 I have run the compiled Windows build and the plain Python script on Ubuntu myself; there is no packaged Linux build yet.
 
 <figure>
-  <img src="screenshot-windows.png" alt="The GPX Combiner window running on Windows 11, with the desktop taskbar visible" loading="lazy">
-  <figcaption>The Windows build, compiled with PyInstaller and run on Windows 11.</figcaption>
+  <img src="screenshot-windows.png" alt="The GPX Combiner window running on Windows 10, with the desktop taskbar visible" loading="lazy">
+  <figcaption>The Windows build, compiled with PyInstaller and run on Windows 10.</figcaption>
 </figure>
 
 ### A responsive interface
