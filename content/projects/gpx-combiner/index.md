@@ -1,9 +1,9 @@
 ---
 title: GPX Combiner
-kind: Desktop app and QGIS plugin
-status: Version 3.7.7, plugin 0.3.10 beta
-kind_de: Desktop-App und QGIS-Plugin
-status_de: Version 3.7.7, Plugin 0.3.10 (Beta)
+kind: Desktop & mobile apps and QGIS plugin
+status: Version 3.7.9, plugin 0.3.11-beta
+kind_de: Desktop- & Mobile-App und QGIS-Plugin
+status_de: Version 3.7.9, Plugin 0.3.11-beta
 year: 2026
 order: 2
 featured: true
@@ -16,7 +16,7 @@ summary_de: >-
 lead: >-
   Long rides often end up as several GPX files, and Strava's API offers no GPX export. GPX Combiner puts the pieces back
   together, gets activities out of Strava, previews them on a map and uploads the result, all on your own computer.
-tags: [Python, Tkinter, Strava API, OAuth, PyQGIS, py2app, PyInstaller]
+tags: [Python, Tkinter, Strava API, OAuth, PyQGIS, py2app, PyInstaller, Flask]
 cover: cover.jpg
 cover_alt: "The GPX Combiner logo next to a map of three coloured GPX tracks forming one loop"
 cover_ratio: 1800 / 601
@@ -26,9 +26,10 @@ links:
   - {label: Changelog, url: "https://github.com/florentchevallier/GPX-Combiner/blob/main/CHANGELOG.md"}
 facts:
   - {label: Role, value: "Design, development, testing, packaging and documentation. Code written with an AI assistant."}
-  - {label: Status, value: "Desktop app 3.7.7 with macOS and Windows builds; QGIS plugin 0.3.10, beta"}
+  - {label: Status, value: "Desktop app 3.7.9 with macOS and Windows builds; QGIS plugin 0.3.11-beta"}
+  - {label: Mobile, value: "GPX Combiner mobile, a PWA at gpxcombiner.onrender.com"}
   - {label: Since, value: "February 2026"}
-  - {label: Built with, value: "Python 3.9+, Tkinter, Strava API, OpenStreetMap, PyQGIS, py2app, PyInstaller"}
+  - {label: Built with, value: "Python 3.9+, Tkinter, Strava API, OpenStreetMap, PyQGIS, py2app, PyInstaller, Flask, SQLite"}
   - {label: Size, value: "About 4,000 lines of Python"}
   - {label: License, value: "GPL-3.0-or-later"}
 ---
@@ -156,6 +157,39 @@ separately from the desktop app.
   <figcaption>The QGIS plugin: tracks loaded as styled layers, grouped and ready to combine, tested on macOS.</figcaption>
 </figure>
 
+### A phone in your pocket, not a laptop in your bag
+
+The desktop app and the plugin both assume you're at a computer, and that's rarely true right after a
+ride: my friends are on a train, or checking out of a hotel. [GPX Combiner mobile](https://gpxcombiner.onrender.com/)
+is a phone-first way in, hosted on Render and installable straight from the browser like a native app — a
+real PWA, with a manifest and a service worker, added to the home screen with one tap.
+
+It reuses `core/` exactly like the QGIS plugin does, behind a small Flask backend, and adds one thing
+neither of the others needs: several people sharing the same app at the same address, at the same time.
+There's no password; signing in with Strava's own OAuth is enough, and each person's tokens sit in one
+row of a small SQLite table. It combines either Strava activities or GPX files picked straight from the
+phone's storage, the same two ways the desktop app works.
+
+Cutting the interface down for a small touchscreen was its own problem, not a smaller version of the
+desktop one: no map preview, no language picker, nothing that asks for more than a thumb and a few
+taps. The app's own footer sends anyone who needs more back to the desktop app on purpose. Getting a
+small app properly hosted, authenticated and reachable from anywhere is real work in its own right; it's
+just not the geomatic core of this project, which is why it comes last here, the cherry on the cake
+rather than the main slice.
+
+I tested it thoroughly myself — both browsers, two separate Strava accounts — before sharing the address
+with friends to try.
+
+<figure>
+  <img src="screenshot-mobile-activities.jpg" alt="GPX Combiner mobile open in a phone browser, showing a list of recent Strava activities with checkboxes to select which ones to combine" loading="lazy">
+  <figcaption>The activity list on a phone: pick the rides to combine, straight from Strava.</figcaption>
+</figure>
+
+<figure>
+  <img src="screenshot-mobile-installed.jpg" alt="GPX Combiner mobile running as an installed app on a phone home screen, in standalone display mode with no browser address bar" loading="lazy">
+  <figcaption>Installed as a PWA: no browser chrome, an icon on the home screen like any other app.</figcaption>
+</figure>
+
 ## What I learned
 
 **Packaging is its own problem.** Certificates in a bundled app, Tk on a Homebrew Python, an icon that only appeared on the
@@ -182,7 +216,5 @@ files and real Strava data, chose the packaging and the architecture, and decide
 - Full paging and date filtering in the plugin's Strava import, matching the desktop app.
 - Publication in the official QGIS Plugin Repository.
 - Testing the plugin on Windows and Linux, and a packaged Linux build of the desktop app.
-- A mobile way to do the same thing. Several friends ask me to combine and upload their files while they are
-  still travelling home after a ride, when the desktop app is not an option. Tkinter does not run on a phone,
-  so this would mean a different interface built around the same core: browsing Strava activities, opening
-  and closing them one at a time or side by side, and sending the result back.
+- Now that GPX Combiner mobile is live, opening it to more of the friends who asked for it, and fixing
+  what their real use turns up that my own testing didn't.
