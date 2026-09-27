@@ -9,13 +9,13 @@ order: 2
 featured: true
 summary: >-
   Merge GPX tracks, pull activities out of Strava and push the result back. A local Python app packaged
-  for macOS and Windows, with a companion QGIS plugin.
+  for macOS and Windows, with a companion QGIS plugin. And now a mobile app!
 summary_de: >-
   GPX-Tracks zusammenführen, Aktivitäten aus Strava holen und das Ergebnis zurückladen. Eine lokale
-  Python-Anwendung für macOS und Windows mit einem passenden QGIS-Plugin.
+  Python-Anwendung für macOS und Windows mit einem passenden QGIS-Plugin. Und jetzt eine mobile-App!
 lead: >-
-  Long rides often end up as several GPX files, and Strava's API offers no GPX export. GPX Combiner puts the pieces back
-  together, gets activities out of Strava, previews them on a map and uploads the result, all on your own computer.
+  Long rides often end up as several GPX files, and Strava's API offers no activities merge possibilities. GPX Combiner puts the pieces back
+  together, gets activities out of Strava, previews them on a map and uploads the result, all on your own computer. And now on your smartphone too!
 tags: [Python, Tkinter, Strava API, OAuth, PyQGIS, py2app, PyInstaller, Flask]
 cover: cover.jpg
 cover_alt: "The GPX Combiner logo next to a map of three coloured GPX tracks forming one loop"
@@ -179,6 +179,11 @@ rather than the main slice.
 
 I tested it thoroughly myself — both browsers, two separate Strava accounts — before sharing the address
 with friends to try.
+
+<figure>
+  <img src="screenshot-4-mobile-views.png" alt="Four views of GPX Combiner mobile open in a phone browser, then as PWA, showing the process to lon on Strava, choose activities with checkboxes and visualise them before combining and uploading" loading="lazy">
+  <figcaption>From left to right: browser view that incite to install the PWA; selection of the activities to combine; visualisation on the map; review before upload."<figcaption>
+</figure>
 
 <figure>
   <img src="screenshot-mobile-activities.jpg" alt="GPX Combiner mobile open in a phone browser, showing a list of recent Strava activities with checkboxes to select which ones to combine" loading="lazy">
