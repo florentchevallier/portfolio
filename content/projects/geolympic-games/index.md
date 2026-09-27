@@ -1,9 +1,9 @@
 ---
 title: GeOlympic Games
 kind: Interactive web game
-status: Prototype v0.6, playable online
+status: Prototype v0.8.0, playable online
 kind_de: Interaktives Browserspiel
-status_de: Prototyp v0.6, online spielbar
+status_de: Prototyp v0.8.0, online spielbar
 year: 2026
 order: 1
 featured: true
@@ -33,8 +33,9 @@ embed:
   height: 700
 facts:
   - {label: Role, value: "Concept, game design, data selection and testing. Code written with an AI assistant."}
-  - {label: Status, value: "Prototype v0.5.6, hosted on GitHub Pages"}
-  - {label: Content, value: "60 cities, islands and seas in six series"}
+  - {label: Status, value: "Prototype v0.8.0, hosted on GitHub Pages"}
+  - {label: Content, value: "60+ cities, islands and seas in six series"}
+  - {label: Player profile, value: "Best score per series, saved locally (no account)"}
   - {label: Built with, value: "MapLibre GL JS, OpenTopoMap relief tiles, MapTiler, Natural Earth, QGIS"}
   - {label: Format, value: "One HTML file, no build step, no backend"}
 ---
@@ -158,6 +159,22 @@ produced a broken frame.
 
 Adding `?debug` to the address steps through every place in every series, with direct access to each zoom level and each
 viewpoint. It exists to catch bad viewpoints and badly drawn sea limits without playing full sessions.
+
+### Fullscreen, without freezing the game
+
+Fullscreen sounds like a one-line feature — call `requestFullscreen()` on the game screen, done. It wasn't: fullscreening
+the screen that gets hidden between rounds (to show setup or results) left the browser convinced it was still displaying
+an element that had just vanished, and every click stopped registering. The fix was to fullscreen a wrapper around the
+whole page instead, toggled from the main screen rather than from inside a session, so the element in fullscreen never
+needs to disappear. The other subtlety was timing: MapLibre needs to be told to resize once the browser's own fullscreen
+transition is actually done, and a fixed delay guessed wrong often enough to leave the map looking stretched — a
+`ResizeObserver` watching the map's real container size fixed that for good.
+
+### One relief, two uses
+
+The animated topographic backdrop on this portfolio's own homepage — a synthetic relief traced in with CSS as the page
+loads — turned out to fit GeOlympic Games just as well, generated fresh so it isn't the same landscape twice, and
+sitting quietly behind the interface rather than as a hero image.
 
 ## What I learned
 
