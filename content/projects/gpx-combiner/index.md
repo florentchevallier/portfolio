@@ -185,16 +185,6 @@ with friends to try.
   <figcaption>From left to right: browser view that incite to install the PWA; selection of the activities to combine; visualisation on the map; review before upload."<figcaption>
 </figure>
 
-<figure>
-  <img src="screenshot-mobile-activities.jpg" alt="GPX Combiner mobile open in a phone browser, showing a list of recent Strava activities with checkboxes to select which ones to combine" loading="lazy">
-  <figcaption>The activity list on a phone: pick the rides to combine, straight from Strava.</figcaption>
-</figure>
-
-<figure>
-  <img src="screenshot-mobile-installed.jpg" alt="GPX Combiner mobile running as an installed app on a phone home screen, in standalone display mode with no browser address bar" loading="lazy">
-  <figcaption>Installed as a PWA: no browser chrome, an icon on the home screen like any other app.</figcaption>
-</figure>
-
 ## What I learned
 
 **Packaging is its own problem.** Certificates in a bundled app, Tk on a Homebrew Python, an icon that only appeared on the
