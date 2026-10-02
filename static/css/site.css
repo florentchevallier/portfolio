@@ -233,6 +233,21 @@ p { margin: 0 0 1em; }
 .work-media.is-contain img, .cover.is-contain img { object-fit: contain; }
 .cover { margin: 2rem 0 0; }
 
+/* Layered, animated cover (front matter: cover_layers). Scenery stays still; only clouds and the neon edge move. */
+.cover-anim { position: relative; container-type: inline-size; }
+.cover-anim img { position: absolute; height: auto; }
+.cover-anim .ca-plate, .cover-anim .ca-glow { inset: 0; width: 100%; height: 100%; }
+.cover-anim .ca-glow {
+  mix-blend-mode: screen; filter: saturate(1.8) brightness(1.35); opacity: 0;
+  -webkit-mask-image: linear-gradient(to right, transparent 76%, #000 100%);
+          mask-image: linear-gradient(to right, transparent 76%, #000 100%);
+  animation: ca-pulse 3.2s ease-in-out infinite;
+}
+.cover-anim .ca-clouds { animation: ca-drift 22s ease-in-out infinite alternate; }
+@keyframes ca-pulse { 50% { opacity: 1; } }
+@keyframes ca-drift { from { transform: translateX(-1.5cqw); } to { transform: translateX(3cqw); } }
+@media (prefers-reduced-motion: reduce) { .cover-anim .ca-glow, .cover-anim .ca-clouds { animation: none; } }
+
 .work-body { display: grid; gap: 1rem 3rem; }
 @media (min-width: 52rem) { .work-body { grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr); } }
 

@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 470" role="img" aria-labelledby="t d">
+<title id="t">How Wahoondrer builds a map tile</title>
+<desc id="d">OpenStreetMap data goes through WahooMapsCreator (filter, split, merge with land and sea, MapWriter). Wandrer KMZ and Squadrats KML files are converted into OSM-like ways and merged in before MapWriter. The result is one map file per tile, drawn on the Wahoo ELEMNT BOLT by a custom theme. A local web page drives the whole pipeline.</desc>
+<style>
+text{font-family:Overpass,"Segoe UI",Arial,sans-serif;fill:#14222E}
+.h{font-size:16px;font-weight:700}
+.b{font-size:16px;font-weight:800}
+.t{font-size:13.5px;fill:#465662}
+.box{fill:#fff;stroke:#14222E;stroke-width:2;rx:8}
+.mine{fill:#fff;stroke:#2F6DB8;stroke-width:2.4;rx:8}
+.arr{stroke:#14222E;stroke-width:2.2;fill:none;marker-end:url(#a)}
+.rel{stroke:#2F6DB8;stroke-width:2.2;fill:none;stroke-dasharray:6 5;marker-end:url(#c)}
+</style>
+<defs>
+<marker id="a" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#14222E"/></marker>
+<marker id="c" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#2F6DB8"/></marker>
+</defs>
+<rect width="960" height="470" rx="6" fill="#F7F9F8"/>
+
+<text class="h" x="130" y="34" text-anchor="middle">Inputs</text>
+<text class="h" x="480" y="34" text-anchor="middle">Pipeline</text>
+<text class="h" x="830" y="34" text-anchor="middle">Interface and device</text>
+
+<rect class="box" x="30" y="56" width="200" height="74"/>
+<text class="b" x="130" y="88" text-anchor="middle">OpenStreetMap</text>
+<text class="t" x="130" y="109" text-anchor="middle">regional extracts</text>
+
+<rect class="mine" x="30" y="168" width="200" height="74"/>
+<text class="b" x="130" y="200" text-anchor="middle">Wandrer + Squadrats</text>
+<text class="t" x="130" y="221" text-anchor="middle">KMZ / KML exports</text>
+
+<rect class="mine" x="30" y="300" width="200" height="74"/>
+<text class="b" x="130" y="332" text-anchor="middle">Elevation data</text>
+<text class="t" x="130" y="353" text-anchor="middle">contour lines (optional)</text>
+
+<rect class="box" x="300" y="56" width="360" height="74"/>
+<text class="b" x="480" y="88" text-anchor="middle">WahooMapsCreator</text>
+<text class="t" x="480" y="109" text-anchor="middle">filter, split into tiles, land and sea</text>
+
+<rect class="mine" x="300" y="168" width="360" height="74"/>
+<text class="b" x="480" y="200" text-anchor="middle">Conversion and merge (mine)</text>
+<text class="t" x="480" y="221" text-anchor="middle">OSM-like ways with their own IDs and tags</text>
+
+<rect class="mine" x="300" y="300" width="360" height="74"/>
+<text class="b" x="480" y="332" text-anchor="middle">pyhgtmap in its own environment</text>
+<text class="t" x="480" y="353" text-anchor="middle">one elevation file per tile</text>
+
+<rect class="box" x="300" y="410" width="360" height="40"/>
+<text class="b" x="480" y="436" text-anchor="middle">MapWriter: one map file per tile</text>
+
+<rect class="mine" x="730" y="168" width="200" height="74"/>
+<text class="b" x="830" y="200" text-anchor="middle">Local web page</text>
+<text class="t" x="830" y="221" text-anchor="middle">settings, run, results</text>
+
+<rect class="box" x="730" y="400" width="200" height="60"/>
+<text class="b" x="830" y="426" text-anchor="middle">Wahoo ELEMNT BOLT</text>
+<text class="t" x="830" y="446" text-anchor="middle">custom theme draws it</text>
+
+<path class="arr" d="M230 93 H300"/>
+<path class="arr" d="M230 205 H300"/>
+<path class="arr" d="M230 337 H300"/>
+<path class="arr" d="M480 130 V168"/>
+<path class="arr" d="M480 242 V300"/>
+<path class="arr" d="M480 374 V410"/>
+<path class="arr" d="M660 430 H730"/>
+<path class="rel" d="M730 205 H660"/>
+</svg>

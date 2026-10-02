@@ -37,6 +37,15 @@
         </div>
       </div>
     </figure>
+    {% elif p.cover and p.cover_layers %}
+    <figure class="cover cover-anim" role="img" aria-label="{{ p.cover_alt | default('') }}" style="--ratio: {{ p.cover_ratio | default('16 / 9') }};">
+      <img class="ca-plate" src="{{ p.cover_layers.plate }}" alt="" decoding="async">
+      <img class="ca-glow" src="{{ p.cover_layers.plate }}" alt="" aria-hidden="true" decoding="async">
+      <img class="ca-clouds" src="{{ p.cover_layers.clouds.file }}" alt="" aria-hidden="true" decoding="async"
+           style="left: {{ p.cover_layers.clouds.left }}%; top: {{ p.cover_layers.clouds.top }}%; width: {{ p.cover_layers.clouds.width }}%;">
+      <img class="ca-rider" src="{{ p.cover_layers.rider.file }}" alt="" aria-hidden="true" decoding="async"
+           style="left: {{ p.cover_layers.rider.left }}%; top: {{ p.cover_layers.rider.top }}%; width: {{ p.cover_layers.rider.width }}%;">
+    </figure>
     {% elif p.cover %}
     <figure class="cover{% if p.cover_fit | default('cover') == 'contain' %} is-contain{% endif %}"
             style="--ratio: {{ p.cover_ratio | default('16 / 9') }};{% if p.cover_bg %} --cover-bg: {{ p.cover_bg }};{% endif %}">
