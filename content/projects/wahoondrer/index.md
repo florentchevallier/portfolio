@@ -1,5 +1,5 @@
 ---
-title: Wahoondrer
+title: maprBoy
 kind: Map-building pipeline with a local web interface
 status: Working prototype, tested on a Wahoo ELEMNT BOLT v2
 kind_de: Pipeline zum Erzeugen von Karten mit lokaler Weboberfläche
@@ -7,7 +7,6 @@ status_de: Funktionierender Prototyp, auf dem Wahoo ELEMNT BOLT v2 getestet
 year: 2026
 order: 3
 featured: true
-draft: true                             # remove this line to publish
 summary: >-
   Custom maps for a Wahoo bike computer that show, inside the map itself, the roads I have not yet ridden,
   the Squadrats squares I have not yet explored, the places I need on the road and, optionally, contour lines.
@@ -15,13 +14,16 @@ summary_de: >-
   Eigene Karten für einen Wahoo-Fahrradcomputer, in denen die noch nicht befahrenen Straßen, die noch nicht
   erkundeten Squadrats-Quadrate, wichtige Orte und optional Höhenlinien direkt in die Karte eingebaut sind.
 lead: >-
-  I have used Wandrer for years to track which roads I have cycled, but its custom maps force a choice between the
-  simple Wandrer style and a colourful, detailed map. Wahoondrer removes that choice: it merges my Wandrer, and also Squadrats history into
-  a detailed WahooMapsCreator map, tile by tile, and a local web page drives the whole build. Plus customs POIs!
+  For years I have used web services such as Wandrer and Squadrats to track where I have already been, but showing that
+  data live on my bike computer during a ride came with a trade-off: a plain map instead of a colourful, detailed one.
+  With maprBoy, I get the best of both worlds. It merges that history into a detailed OpenStreetMap-based map, tile by
+  tile, and a local web page drives the whole build. Customised points of interest come along too.
 tags: [Python, OpenStreetMap, Mapsforge, VTM themes, KML, Leaflet, GDAL]
 cover: cover.jpg                     
 cover_alt: MaprBoy distributing his freshly forged digital maps
 cover_ratio: 1800 / 601
+icon: icon-rail.webp
+icon_alt: "maprBoy icon: a bike computer in front of a country landscape that turns into a neon grid"
 cover_layers:                          # animated cover on the project page: still scenery, drifting clouds, pulsing neon edge
   plate: anim-plate.webp
   clouds: {file: anim-clouds.webp, left: 6.667, top: 0, width: 35.667}
@@ -33,7 +35,7 @@ facts:
   - {label: Device, value: "Wahoo ELEMNT BOLT v2, previewed on the desktop with Cruiser"}
   - {label: Since, value: "2026"}
   - {label: Built with, value: "Python 3.10, WahooMapsCreator, Osmium, Osmosis (MapWriter), GDAL, pyhgtmap, Leaflet, micromamba"}
-  - {label: Size, value: "About 3,300 lines of Python, one single-page web interface, 43 automated tests"}
+  - {label: Size, value: "About 3,400 lines of Python, one single-page web interface of about 1,000 lines, 46 automated tests"}
   - {label: Data, value: "OpenStreetMap, my own Wandrer and Squadrats exports (never published), Viewfinder elevation data"}
   - {label: License, value: "Not decided yet, probably GPL-3 like WahooMapsCreator"}
 ---
@@ -47,7 +49,7 @@ detailed maps, with points of interest, but it knows nothing about my Wandrer hi
 
 What I wanted was both at once: a detailed map where, at a glance, I can see which roads are still unexplored, and where the
 squares of the Squadrats game I have not yet visited are outlined too. A bike computer like Wahoo's Bolt v2 shows one map, so this
-cannot be a second layer on top of it: the extra information has to be inside the map file.
+cannot be a second layer on top of it: the extra information has to be inside the map file. Those maps come as one file per zoom-8 tile, roughly 100 km wide in central Europe, so each tile is built separately.
 
 <figure>
   <img src="wandrer-and-squadrats-on-bolt.jpg" alt="Two pictures showing Wandrer's untraveled roads (orange) and Squadrat's small tile (dashed red)" loading="lazy">
@@ -77,6 +79,9 @@ matching would bring many problems and no benefit. Wandrer lines are simply extr
 - Outlines the Squadrats squares I have not explored, in two sizes, around the ones I have.
 - Adds the points of interest I use on the road, with icons that change with the data (free or paid toilets, for example).
 - Optionally adds contour lines, with a level of detail chosen for each tile.
+- Treats Wandrer and Squadrats as independent layers: Squadrats alone need no Wandrer export, and exports that do not touch the chosen tiles are never even unzipped.
+- Reads each export's metadata (date, activity type, main town, tiles) so that I choose what to merge.
+- Manages the OpenStreetMap regions it downloads: date, size, age, update or delete.
 - Does all of it from a local web page, with a Simple and a Pro mode.
 
 <figure>
@@ -109,7 +114,7 @@ Wandrer boundaries are deliberately faint and easy to switch off. Roads not yet 
 
 A toilet icon can be green (free), red (paid) or blue (no information), and customer-only or private ones are hidden. The
 trick is a rule in the theme where `-|a|b` means "neither a nor b", which also includes the case where the tag is absent. Today the POI catalogue is a table (tag, condition, icon, zoom) from which the tag mappings, the filter list and the theme rules are generated, so
-adding a place type no longer means editing three files by hand. I deliberately kept the list short: a bike repair station and a camp site were worth adding, restaurants and pharmacies were not, because a phone search makes more sense for them.
+adding a place type no longer means editing three files by hand. The default style is never modified: my own choices are stored separately and one button restores the defaults. I deliberately kept the list short: a bike repair station and a camp site were worth adding, restaurants and pharmacies were not, because a phone search makes more sense for them.
 
 ### Contour lines, and the cost of detail
 
@@ -138,11 +143,11 @@ contour spacing or the point-of-interest editor. Each section can have its own m
 
 A full build takes a long time, so the tool is built around not wasting it or losing work. A run replaces only the tiles it rebuilds and keeps the others, one tile per
 coordinates. If I want several versions of a tile, I keep them myself. An option to redo only the Wandrer part checks first that the tiles, contour
-lines, points of interest and map data are unchanged since the last full build, and rebuilds everything, with a clear message, otherwise. A red STOP button cancels a run, the log ends with the total time, and the build can go on if the browser is closed, because it belongs to the terminal that started it.
+lines, points of interest and map data are unchanged since the last full build, and rebuilds everything, with a clear message, otherwise. A red STOP button cancels a run, the log ends with the total time, and the build can go on if the browser is closed, because it belongs to the terminal that started it. Tiles with no Wandrer data are copied from the classic build and marked as plain tiles, so the output folder is always the complete set for the device.
 
 <figure>
-  <img src="placeholder-files-list.png" alt="The list of files for the Bolt: the theme, then the tiles of the last run with a New tile badge, a date, the nearest town, the contour level and the size, then the other tiles" loading="lazy">
-  <figcaption>PLACEHOLDER, to replace with a real screenshot. Test data: the files to copy to the Bolt, newest run first, with date, town, contour level and size.</figcaption>
+  <img src="files-list.png" alt="The list of files for the Bolt: the theme, then the tiles of the last run with a New tile badge, a date, the nearest town, the contour level and the size, then the other tiles" loading="lazy">
+  <figcaption>Test data: the files to copy to the Bolt, newest run first, with date, town, contour level and size.</figcaption>
 </figure>
 
 ### Respecting the data and the licences
@@ -152,13 +157,13 @@ project. WMC is used as a pinned dependency, not copied or modified. OpenStreetM
 GPL-3 as well. I have not added a licence file yet; reading what each licence requires comes first.
 
 <figure>
-  <img src="placeholder-regions-tree.png" alt="The list of downloaded OpenStreetMap regions grouped by country and sub-region, with size, date, age and Update and Delete buttons" loading="lazy">
-  <figcaption>PLACEHOLDER, to replace with a real screenshot. The downloaded OpenStreetMap regions, grouped by country.</figcaption>
+  <img src="regions-tree.png" alt="The list of downloaded OpenStreetMap regions, grouped by country and sub-region, with tick boxes, size, download date, age, the tiles that need each region, and Update and Delete buttons" loading="lazy">
+  <figcaption>The downloaded OpenStreetMap regions, grouped by country.</figcaption>
 </figure>
 
 ## How I tested it
 
-Most of the testing happens on the device itself: copy a tile to the BOLT, look at it on the road, at the scale I really use. The code has 43 automated
+Most of the testing happens on the device itself: copy a tile to the BOLT, look at it on the road, at the scale I really use. The code has 46 automated
 tests, on synthetic data only. The bike computer keeps its own few generated tiles around my position, which can overwrite a test file, so I
 learned to work with the production tiles and to copy file by file, never replacing a folder, after a backup of the maps folder.
 
@@ -181,7 +186,8 @@ things to me along the way, which is how I learned the map-building tools.
 ## What comes next
 
 - Test the contour lines on the road: file size, start-up time and battery over a full ride.
-- Add more points of interest with proper icons (bike repair stations), and check the shelters on the ground.
-- Package everything as a standalone app, so nobody has to install Python, Java, GDAL and Osmium by hand.
+- Give the bike repair stations a proper icon and show them by default, and check the shelters on the ground.
+- Warn when a freshly built tile is suspiciously small, and list the date of each source region next to the files, so I never leave for a ride with an empty or outdated map.
+- Package everything as an installer, so nobody has to install Python, Java, GDAL and Osmium by hand: macOS first, then Windows, which matters for most people, and Linux as a bonus.
 - Decide on the licence and publish the repository.
-- Perhaps open the project to other bike computers, which would mean a different name.
+- Finish the rename: the project is now called maprBoy, and the Wahoo-specific parts keep the internal name Wahoondrer for now. Other bike computers (Garmin, Karoo) would get parts of their own.

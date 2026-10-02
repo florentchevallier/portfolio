@@ -57,6 +57,11 @@
   <div class="wrap project-layout{% if not p.facts and not p.toc %} no-rail{% endif %}">
     {% if p.facts or p.toc %}
     <aside class="rail">
+      {% if p.icon %}
+      <figure class="rail-icon">
+        <img src="{{ p.icon }}" alt="{{ p.icon_alt | default('') }}" width="144" height="144" decoding="async">
+      </figure>
+      {% endif %}
       <dl class="facts">
         {% for f in p.facts %}
         <div><dt>{{ f.label }}</dt><dd>{{ f.value }}</dd></div>
