@@ -5,7 +5,7 @@ status: Prototype v0.8.0, playable online
 kind_de: Interaktives Browserspiel
 status_de: Prototyp v0.8.0, online spielbar
 year: 2026
-order: 1
+order: 3
 featured: true
 summary: >-
   Guess a city, an island or a sea from nothing but its real terrain. No labels, no names,

@@ -5,7 +5,7 @@ status: Working prototype, tested on a Wahoo ELEMNT BOLT v2
 kind_de: Pipeline zum Erzeugen von Karten mit lokaler Weboberfläche
 status_de: Funktionierender Prototyp, auf dem Wahoo ELEMNT BOLT v2 getestet
 year: 2026
-order: 3
+order: 1
 featured: true
 summary: >-
   Custom maps for a Wahoo bike computer that show, inside the map itself, the roads I have not yet ridden, the Squadrats squares I have not yet explored, the places I need on the road and, optionally, contour lines.
